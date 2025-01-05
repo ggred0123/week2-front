@@ -67,9 +67,9 @@ const MemorialServiceLanding: React.FC = () => {
         <div
           className="w-full bg-gradient-to-r from-purple-500 to-pink-500 p-8 flex flex-col items-center justify-center"
           style={{
-            height: "250px",
-            borderTopLeftRadius: "50px",
-            borderTopRightRadius: "50px",
+            height: "300px",
+            borderTopLeftRadius: "250px",
+            borderTopRightRadius: "250px",
           }}
         >
           <button
