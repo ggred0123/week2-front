@@ -10,7 +10,7 @@ export default function Header({ title }: HeaderProps) {
       {/* Title */}
       <h1
         style={{
-          marginTop: '20px',
+          marginTop: '40px',
           color: 'var(--Black, #333)',
           fontFamily: 'Heebo',
           fontSize: '35px',

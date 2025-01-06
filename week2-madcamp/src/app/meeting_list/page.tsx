@@ -1,62 +1,82 @@
-import React from 'react';
+"use client";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import CategoryButtons from "../components/CategoryButtons";
-import MeetingCard from "../components/MeetingCard";
-import BottomNav from "../components/BottomNav";
 import CenterBox from "../components/CenterBox";
+import BottomNav from "../components/BottomNav";
+import Popup from "../components/Popup"; // Popup 컴포넌트 임포트
 
 export default function MeetingListPage() {
+  const [centerBoxContent, setCenterBoxContent] = useState({
+    color: "#FA5D5D",
+    icon: "meet",
+    text: "Meet new friend list",
+  });
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false); // 팝업 상태 관리
+
+  const updateCenterBox = (
+    color: string,
+    icon: "meet" | "exercise" | "drink" | "study",
+    text: string
+  ) => {
+    setCenterBoxContent({ color, icon, text });
+  };
+
+  const togglePopup = () => {
+    setIsPopupOpen((prev) => !prev);
+  };
+
   return (
-    <div style={{ background: '#FEFEFE' }} className="min-h-screen bg-white flex flex-col">
-      {/* 헤더 */}
+    <div className="min-h-screen bg-white flex flex-col relative">
       <Header title="Meeting list" />
-
-      {/* 카테고리 버튼 */}
-
-      {/* 모임 리스트 */}
-      <div className="px-4 py-4 space-y-4">
-        <MeetingCard
-          image={"/images/face_genius.jpg"}
-          title="차은우 닮은 1분반 훈남이랑 미팅하실 미녀들?"
-          subtitle="Love :)"
-          location="궁동 샤오차이나"
-          participants="3/6명"
-          icon={
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 12 12" fill="none">
-              <path d="M10.5 5C10.5 8.5 6 11.5 6 11.5C6 11.5 1.5 8.5 1.5 5C1.5 3.80653 1.97411 2.66193 2.81802 1.81802C3.66193 0.974106 4.80653 0.5 6 0.5C7.19347 0.5 8.33807 0.974106 9.18198 1.81802C10.0259 2.66193 10.5 3.80653 10.5 5Z" fill="#FA5D5D" />
-              <path d="M6 6.5C6.82843 6.5 7.5 5.82843 7.5 5C7.5 4.17157 6.82843 3.5 6 3.5C5.17157 3.5 4.5 4.17157 4.5 5C4.5 5.82843 5.17157 6.5 6 6.5Z" fill="white" />
-            </svg>
-          }
-        />
-        <MeetingCard
-          image={"/images/sung_image.jpg"}
-          title="1월 24일 딸기시루팥"
-          subtitle="Sweet Cakes"
-          location="성심당 케이부띠끄"
-          participants="8/10명"
-          icon={
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 12 12" fill="none">
-              <path d="M10.5 5C10.5 8.5 6 11.5 6 11.5C6 11.5 1.5 8.5 1.5 5C1.5 3.80653 1.97411 2.66193 2.81802 1.81802C3.66193 0.974106 4.80653 0.5 6 0.5C7.19347 0.5 8.33807 0.974106 9.18198 1.81802C10.0259 2.66193 10.5 3.80653 10.5 5Z" fill="#FA5D5D" />
-              <path d="M6 6.5C6.82843 6.5 7.5 5.82843 7.5 5C7.5 4.17157 6.82843 3.5 6 3.5C5.17157 3.5 4.5 4.17157 4.5 5C4.5 5.82843 5.17157 6.5 6 6.5Z" fill="white" />
-            </svg>
-          }
-        />
-        <MeetingCard
-          image={"/images/susi_image.jpg"}
-          title="방어회 먹고싶어요"
-          subtitle="Sashimi"
-          location="신학관 3층 동아리연합회실"
-          participants="3/4명"
-          icon={
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 12 12" fill="none">
-              <path d="M10.5 5C10.5 8.5 6 11.5 6 11.5C6 11.5 1.5 8.5 1.5 5C1.5 3.80653 1.97411 2.66193 2.81802 1.81802C3.66193 0.974106 4.80653 0.5 6 0.5C7.19347 0.5 8.33807 0.974106 9.18198 1.81802C10.0259 2.66193 10.5 3.80653 10.5 5Z" fill="#FA5D5D" />
-              <path d="M6 6.5C6.82843 6.5 7.5 5.82843 7.5 5C7.5 4.17157 6.82843 3.5 6 3.5C5.17157 3.5 4.5 4.17157 4.5 5C4.5 5.82843 5.17157 6.5 6 6.5Z" fill="white" />
-            </svg>
-          }
+      <div className="px-12 py-4">
+        <CategoryButtons
+          onCategoryChange={(color, _, text) => {
+            const iconMap: Record<string, "meet" | "exercise" | "drink" | "study"> = {
+              "Meet new friends": "meet",
+              Exercise: "exercise",
+              Drink: "drink",
+              Study: "study",
+            };
+            const iconKey = iconMap[text] || "meet";
+            updateCenterBox(color, iconKey, text);
+          }}
         />
       </div>
-      {/* 하단 네비게이션 */}
+      <div className="px-4 py-4">
+        <CenterBox
+          color={centerBoxContent.color}
+          icon={centerBoxContent.icon}
+          text={centerBoxContent.text}
+        />
+      </div>
       <BottomNav />
+
+      {/* Floating + Button */}
+      <button
+        className="absolute bottom-6 left-6 w-14 h-14 flex items-center justify-center rounded-full shadow-lg bg-pink-500"
+        style={{
+          width: "108.235px",
+          height: "108.238px",
+          backgroundColor: "#FA5D5D",
+          position: 'relative', // 위치 조정 가능
+          top: '600px',          // 위로 10px 이동
+          left: '570px',          // 왼쪽으로 5px 이동
+        }}
+        onClick={togglePopup}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 70 70" fill="none">
+          <circle cx="37" cy="34.2456" r="25" fill="white"/>
+          <path d="M14.3763 14.3763C17.0718 11.6115 20.2895 9.40951 23.8427 7.89801C27.3959 6.3865 31.2138 5.59558 35.0751 5.57111C38.9363 5.54664 42.764 6.28912 46.3361 7.75548C49.9081 9.22183 53.1535 11.3829 55.8839 14.1132C58.6142 16.8436 60.7753 20.089 62.2416 23.661C63.708 27.2331 64.4505 31.0608 64.426 34.922C64.4015 38.7833 63.6106 42.6012 62.0991 46.1544C60.5876 49.7076 58.3856 52.9253 55.6208 55.6208C50.1199 60.9338 42.7524 63.8736 35.105 63.8072C27.4576 63.7407 20.1422 60.6733 14.7345 55.2656C9.32673 49.8578 6.2593 42.5425 6.19284 34.895C6.12639 27.2476 9.06623 19.8801 14.3792 14.3792L14.3763 14.3763ZM37.9167 26.25C37.9167 25.4765 37.6094 24.7346 37.0624 24.1876C36.5154 23.6406 35.7736 23.3333 35 23.3333C34.2265 23.3333 33.4846 23.6406 32.9376 24.1876C32.3906 24.7346 32.0833 25.4765 32.0833 26.25V32.0833H26.25C25.4765 32.0833 24.7346 32.3906 24.1876 32.9376C23.6406 33.4846 23.3333 34.2265 23.3333 35C23.3333 35.7736 23.6406 36.5154 24.1876 37.0624C24.7346 37.6094 25.4765 37.9167 26.25 37.9167H32.0833V43.75C32.0833 44.5236 32.3906 45.2654 32.9376 45.8124C33.4846 46.3594 34.2265 46.6667 35 46.6667C35.7736 46.6667 36.5154 46.3594 37.0624 45.8124C37.6094 45.2654 37.9167 44.5236 37.9167 43.75V37.9167H43.75C44.5235 37.9167 45.2654 37.6094 45.8124 37.0624C46.3594 36.5154 46.6667 35.7736 46.6667 35C46.6667 34.2265 46.3594 33.4846 45.8124 32.9376C45.2654 32.3906 44.5235 32.0833 43.75 32.0833H37.9167V26.25Z" fill="#FA5D5D"/>
+          </svg>
+      </button>
+
+      {/* Popup */}
+      <Popup isOpen={isPopupOpen} onClose={togglePopup}>
+        <h2 className="text-xl font-bold mb-4">Add New Item</h2>
+        <p className="mb-4">This is a placeholder for the popup content.</p>
+      </Popup>
     </div>
   );
 }

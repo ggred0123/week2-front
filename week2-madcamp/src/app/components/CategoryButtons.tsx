@@ -1,9 +1,17 @@
-export default function CategoryButtons() {
+"use client";
+import React from 'react';
+
+interface CategoryButtonsProps {
+  onCategoryChange: (color: string, icon: React.ReactNode, text: string) => void;
+}
+
+export default function CategoryButtons({ onCategoryChange }: CategoryButtonsProps) {
   return (
     <div
-      className="grid grid-cols-2 gap-x-15 gap-y-6 relative" // gap-y를 약간 늘려 더 큰 크기에 맞게 조정
+      className="grid grid-cols-2 gap-x-15 gap-y-6 relative"
       style={{
-        left: "10px",
+        left: '10px',
+        padding:'10px',
       }}
     >
       {/* Meet new friends 버튼 */}
@@ -12,15 +20,18 @@ export default function CategoryButtons() {
         style={{
           background: "#FBE5E8",
         }}
+        onClick={() =>
+          onCategoryChange(
+            "#FA5D5D",
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 17 18" fill="none">
+              <circle cx="8.5" cy="9" r="8" fill="white" />
+            </svg>,
+            "Meet new friends"
+          )
+        }
       >
         <div className="absolute -top-2 -left-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="100"
-            height="100"
-            viewBox="0 0 90 90"
-            fill="none"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 90 90" fill="none">
             <g filter="url(#filter0_d_49_163)">
               <rect x="24" y="25" width="63" height="63" rx="12" fill="#FA5D5D" />
             </g>
@@ -61,15 +72,18 @@ export default function CategoryButtons() {
         style={{
           background: "#DCEBFF",
         }}
+        onClick={() =>
+          onCategoryChange(
+            "#54A5DA",
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 17 18" fill="none">
+              <rect x="0" y="0" width="16" height="16" fill="white" />
+            </svg>,
+            "Exercise"
+          )
+        }
       >
-        <div className="absolute -top0.25 -left-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="100"
-            height="100"
-            viewBox="0 0 90 90"
-            fill="none"
-          >
+        <div className="absolute -top-0.25 -left-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 90 90" fill="none">
             <g filter="url(#filter0_d_49_175)">
               <rect x="24" y="16" width="63" height="63" rx="12" fill="#54A5DA" />
             </g>
@@ -103,36 +117,40 @@ export default function CategoryButtons() {
         </div>
       </button>
 
-      {/* Drink 버튼 */}
       <button
         className="relative flex items-center justify-center w-[280px] h-[110px] rounded-[30px]"
         style={{
           background: "rgba(239, 209, 255, 0.87)",
         }}
+        onClick={() =>
+          onCategoryChange(
+            "#D199F0",
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 17 18" fill="none">
+              <rect x="0" y="0" width="16" height="16" fill="white" />
+            </svg>,
+            "Drink"
+          )
+        }
       >
-        <div className="absolute -top0.25 -left-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="100"
-            height="100"
-            viewBox="0 0 90 90"
-            fill="none"
-          >
+        <div className="absolute -top-0.25 -left-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 90 90" fill="none">
             <g filter="url(#filter0_d_49_163)">
               <rect x="24" y="16" width="63" height="63" rx="12" fill="#D199F0" />
             </g>
             <g transform="translate(36,22) scale(1.7)">
-              <path d="M9 18.6667C9.24 18.6667 9.425 18.417 9.795 17.9177L13.482 12.9278C15.375 10.3682 16.322 9.08717 15.902 8.04417C15.482 7 14.021 7 11.099 7H6.901C3.98 7 2.516 7 2.098 8.04417C1.68 9.08833 2.625 10.3682 4.517 12.9278L8.205 17.9177C8.574 18.417 8.76 18.6667 9 18.6667ZM9 18.6667V25.6667M8.5 7L8.099 4.193C8.06909 3.98391 7.99091 3.78828 7.87286 3.62713C7.75482 3.46598 7.60137 3.34539 7.429 3.27833L5 2.33333M7.5 25.6667H10.5" 
-              stroke="white" 
-              stroke-width="1.5625" 
-              stroke-linecap="round" 
-              stroke-linejoin="round"
+              <path
+                d="M9 18.6667C9.24 18.6667 9.425 18.417 9.795 17.9177L13.482 12.9278C15.375 10.3682 16.322 9.08717 15.902 8.04417C15.482 7 14.021 7 11.099 7H6.901C3.98 7 2.516 7 2.098 8.04417C1.68 9.08833 2.625 10.3682 4.517 12.9278L8.205 17.9177C8.574 18.417 8.76 18.6667 9 18.6667ZM9 18.6667V25.6667M8.5 7L8.099 4.193C8.06909 3.98391 7.99091 3.78828 7.87286 3.62713C7.75482 3.46598 7.60137 3.34539 7.429 3.27833L5 2.33333M7.5 25.6667H10.5"
+                stroke="white"
+                strokeWidth="1.5625"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
-              <path d="M15.86 10.3052C16.1906 10.7342 16.5949 11.0772 17.0467 11.3118C17.4984 11.5464 17.9875 11.6673 18.482 11.6667C19.4126 11.6691 20.3059 11.2404 20.9656 10.4747C21.6253 9.70899 21.9974 8.66899 22 7.58333C22 5.32817 20.425 3.5 18.482 3.5C17.6379 3.4974 16.8212 3.84981 16.1817 4.49263C15.5422 5.13545 15.1226 6.02562 15 7" 
-              stroke="white" 
-              stroke-width="1.5625" 
-              stroke-linecap="round" 
-              stroke-linejoin="round"
+              <path
+                d="M15.86 10.3052C16.1906 10.7342 16.5949 11.0772 17.0467 11.3118C17.4984 11.5464 17.9875 11.6673 18.482 11.6667C19.4126 11.6691 20.3059 11.2404 20.9656 10.4747C21.6253 9.70899 21.9974 8.66899 22 7.58333C22 5.32817 20.425 3.5 18.482 3.5C17.6379 3.4974 16.8212 3.84981 16.1817 4.49263C15.5422 5.13545 15.1226 6.02562 15 7"
+                stroke="white"
+                strokeWidth="1.5625"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </g>
           </svg>
@@ -155,36 +173,38 @@ export default function CategoryButtons() {
           </span>
         </div>
       </button>
-
-      {/* Study 버튼 */}
       <button
         className="relative flex items-center justify-center w-[280px] h-[110px] rounded-[30px]"
         style={{
           background: "#EAF9C8",
         }}
+        onClick={() =>
+          onCategoryChange(
+            "#ABDB43",
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 17 18" fill="none">
+              <rect x="0" y="0" width="16" height="16" fill="white" />
+            </svg>,
+            "Study"
+          )
+        }
       >
-        <div className="absolute -top0.25 -left-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="100"
-            height="100"
-            viewBox="0 0 90 90"
-            fill="none"
-          >
+        <div className="absolute -top-0.25 -left-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 90 90" fill="none">
             <g filter="url(#filter0_d_49_201)">
               <rect x="24" y="16" width="63" height="63" rx="12" fill="#ABDB43" />
             </g>
             <g transform="translate(29,22) scale(1.7)">
               <path
-                d="M5.59679 20.06L21.4029 4.7625C22.0274 4.18421 22.861 3.86551 23.7252 3.87465C24.5895 3.88379 25.4157 4.22004 26.0269 4.8114C26.6382 5.40277 26.9859 6.20223 26.9956 7.03861C27.0052 7.87498 26.6761 8.68178 26.0788 9.28625L10.27 24.5838C9.90941 24.9328 9.45009 25.1707 8.94996 25.2675L3.875 26.25L4.89025 21.3375C4.99029 20.8535 5.23613 20.409 5.59679 20.06Z" 
-                stroke="white" 
-                stroke-width="2.08333" 
-                stroke-linecap="round" 
-                stroke-linejoin="round"
+                d="M5.59679 20.06L21.4029 4.7625C22.0274 4.18421 22.861 3.86551 23.7252 3.87465C24.5895 3.88379 25.4157 4.22004 26.0269 4.8114C26.6382 5.40277 26.9859 6.20223 26.9956 7.03861C27.0052 7.87498 26.6761 8.68178 26.0788 9.28625L10.27 24.5838C9.90941 24.9328 9.45009 25.1707 8.94996 25.2675L3.875 26.25L4.89025 21.3375C4.99029 20.8535 5.23613 20.409 5.59679 20.06Z"
+                stroke="white"
+                strokeWidth="2.08333"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
-              <path d="M18.7292 8.125L22.6042 11.875" 
-              stroke="white" 
-              stroke-width="2.08333"
+              <path
+                d="M18.7292 8.125L22.6042 11.875"
+                stroke="white"
+                strokeWidth="2.08333"
               />
             </g>
           </svg>
@@ -207,6 +227,7 @@ export default function CategoryButtons() {
           </span>
         </div>
       </button>
+
     </div>
   );
 }
