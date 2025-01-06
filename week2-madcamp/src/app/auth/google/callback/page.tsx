@@ -31,7 +31,7 @@ const GoogleCallbackPage = () => {
         console.log("Redirecting to signup...");
         router.push("/signup");
       } else {
-        console.log("Redirecting to main...");
+        console.log("Redirecting to meeting_list...");
         router.push("/meeting_list");
       }
     } else {
