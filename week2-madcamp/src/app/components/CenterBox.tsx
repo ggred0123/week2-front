@@ -5,8 +5,8 @@ export default function CenterBox() {
     <div style={{ width: '209px', textAlign: 'center' }}>
       <div
         style={{
-          width: '35px',
-          height: '36px',
+          width: '70px',
+          height: '70px',
           flexShrink: 0,
           borderRadius: '8px',
           background: 'var(--Pink, #FA5D5D)',
@@ -41,7 +41,7 @@ export default function CenterBox() {
         style={{
           color: 'var(--Black, #333)',
           fontFamily: 'Heebo',
-          fontSize: '16px',
+          fontSize: '90px',
           fontStyle: 'normal',
           fontWeight: 700,
           lineHeight: '26px',

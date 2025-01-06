@@ -12,19 +12,15 @@ export default function MeetingListPage() {
       <Header title="Meeting list" />
 
       {/* 카테고리 버튼 */}
-      <div className="px-12 py-4">
-        <CategoryButtons />
-      </div>
 
       {/* 모임 리스트 */}
       <div className="px-4 py-4 space-y-4">
-        <CenterBox />
         <MeetingCard
-          image={"/images/icecream_image.jpg"}
-          title="아이스크림 먹으러가실 분?"
-          subtitle="Ice Cream"
-          location="신세계 백화점 B1"
-          participants="4/10명"
+          image={"/images/face_genius.jpg"}
+          title="차은우 닮은 1분반 훈남이랑 미팅하실 미녀들?"
+          subtitle="Love :)"
+          location="궁동 샤오차이나"
+          participants="3/6명"
           icon={
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 12 12" fill="none">
               <path d="M10.5 5C10.5 8.5 6 11.5 6 11.5C6 11.5 1.5 8.5 1.5 5C1.5 3.80653 1.97411 2.66193 2.81802 1.81802C3.66193 0.974106 4.80653 0.5 6 0.5C7.19347 0.5 8.33807 0.974106 9.18198 1.81802C10.0259 2.66193 10.5 3.80653 10.5 5Z" fill="#FA5D5D" />
