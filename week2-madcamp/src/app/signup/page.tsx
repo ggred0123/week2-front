@@ -36,6 +36,9 @@ interface CompleteProfileData {
   preferredAlcoholId: number;
   imageUrl: string;
   leadershipLevel: number;
+  programmingLevel: number;
+  programmingField: string;
+  programmingLanguage: string;
 }
 
 /**
@@ -74,6 +77,9 @@ export default function CompleteProfilePage() {
     preferredAlcoholId: 1,
     leadershipLevel: 0,
     imageUrl: "",
+    programmingLevel: 0,
+    programmingField: "Backend",
+    programmingLanguage: "C/C++",
   });
 
   useEffect(() => {
@@ -139,6 +145,7 @@ export default function CompleteProfilePage() {
       }
 
       alert("프로필 업데이트 완료!");
+      router.replace("/meeting_list");
     } catch (error) {
       console.error("Error completing profile:", error);
     }
@@ -532,6 +539,115 @@ export default function CompleteProfilePage() {
                 fontSize: "0.875rem",
                 fontWeight: "500",
                 color: "black",
+                marginBottom: "4px",
+              }}
+            >
+              개발 경험
+            </label>
+            <select
+              value={formData.programmingLevel}
+              onChange={(e) => {
+                const newValue = Number(e.target.value);
+                console.log("programmingLevel >>> ", newValue);
+                setFormData({
+                  ...formData,
+                  programmingLevel: Number(e.target.value),
+                });
+              }}
+              style={{
+                width: "100%",
+                padding: "8px",
+                border: "1px solid #ccc",
+                borderRadius: "8px",
+              }}
+              required
+            >
+              <option value={0}>0~2회</option>
+              <option value={1}>3~4회</option>
+              <option value={2}>5회 이상</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              style={{
+                display: "block",
+                fontSize: "0.875rem",
+                fontWeight: "500",
+                marginBottom: "4px",
+              }}
+            >
+              개발 분야
+            </label>
+            <select
+              value={formData.programmingField}
+              onChange={(e) => {
+                const newValue = Number(e.target.value);
+                console.log("programmingField >>> ", newValue);
+                setFormData({
+                  ...formData,
+                  programmingField: String(e.target.value),
+                });
+              }}
+              style={{
+                width: "100%",
+                padding: "8px",
+                border: "1px solid #ccc",
+                borderRadius: "8px",
+              }}
+              required
+            >
+              <option value={"Backend"}>백엔드</option>
+              <option value={"Frontend"}>프론트엔드</option>
+              <option value={"AI"}>AI</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              style={{
+                display: "block",
+                fontSize: "0.875rem",
+                fontWeight: "500",
+                marginBottom: "4px",
+              }}
+            >
+              자신있는 프로그래밍 언어
+            </label>
+            <select
+              value={formData.programmingLanguage}
+              onChange={(e) => {
+                const newValue = Number(e.target.value);
+                console.log("programmingLanguage >>> ", newValue);
+                setFormData({
+                  ...formData,
+                  programmingLanguage: String(e.target.value),
+                });
+              }}
+              style={{
+                width: "100%",
+                padding: "8px",
+                border: "1px solid #ccc",
+                borderRadius: "8px",
+              }}
+              required
+            >
+              <option value={"C/C++"}>C/C++</option>
+              <option value={"Java/Typescript"}>Java/Typescript</option>
+              <option value={"Python"}>Python</option>
+              <option value={"Java"}>Java</option>
+              <option value={"Go"}>Go</option>
+              <option value={"R"}>R</option>
+              <option value={"딱히 없다."}>딱히 없다.</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              style={{
+                display: "block",
+                fontSize: "0.875rem",
+                fontWeight: "500",
                 marginBottom: "4px",
               }}
             >
