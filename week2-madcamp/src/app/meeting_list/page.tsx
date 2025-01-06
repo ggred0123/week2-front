@@ -20,7 +20,7 @@ export default function MeetingListPage() {
       <div className="px-4 py-4 space-y-4">
         <CenterBox />
         <MeetingCard
-          image="/images/icecream.jpg"
+          image={"/images/icecream_image.jpg"}
           title="아이스크림 먹으러가실 분?"
           subtitle="Ice Cream"
           location="신세계 백화점 B1"
@@ -33,7 +33,7 @@ export default function MeetingListPage() {
           }
         />
         <MeetingCard
-          image="/images/sweetcakes.jpg"
+          image={"/images/sung_image.jpg"}
           title="1월 24일 딸기시루팥"
           subtitle="Sweet Cakes"
           location="성심당 케이부띠끄"
@@ -46,7 +46,7 @@ export default function MeetingListPage() {
           }
         />
         <MeetingCard
-          image="/images/sashimi.jpg"
+          image={"/images/susi_image.jpg"}
           title="방어회 먹고싶어요"
           subtitle="Sashimi"
           location="신학관 3층 동아리연합회실"
