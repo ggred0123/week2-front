@@ -1,7 +1,12 @@
 "use client";
 import React from "react";
 import MeetingCard from "../components/MeetingCard";
+<<<<<<< HEAD
 import BottomNav from "../components/BottomNav";
+=======
+import BottomNav from '../components/BottomNav1';
+
+>>>>>>> information
 export default function Information() {
   return (
     <div

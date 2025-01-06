@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import CategoryButtons from "../components/CategoryButtons";
 import CenterBox from "../components/CenterBox";
-import BottomNav from "../components/BottomNav";
+import BottomNav1 from "../components/BottomNav1";
 import Popup from "../components/Popup"; // Popup 컴포넌트 임포트
 
 export default function MeetingListPage() {
@@ -51,7 +51,7 @@ export default function MeetingListPage() {
           text={centerBoxContent.text}
         />
       </div>
-      <BottomNav />
+      <BottomNav1/>
 
       {/* Floating + Button */}
       <button
