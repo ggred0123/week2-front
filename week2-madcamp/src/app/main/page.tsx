@@ -8,19 +8,30 @@ const MemorialServiceLanding: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
+    // URL 파라미터에서 accessToken과 isNewUser 확인
     const params = new URLSearchParams(window.location.search);
     const accessToken = params.get("accessToken");
     const isNewUser = params.get("isNewUser");
 
     console.log("Received params:", { accessToken, isNewUser });
 
-    if (accessToken && isNewUser === "true") {
-      console.log("Redirecting to signup...");
-      router.push("/signup");
+    if (accessToken) {
+      // accessToken이 URL에 있는 경우 (구글 로그인 후 리다이렉트)
+      localStorage.setItem("accessToken", accessToken);
+
+      if (isNewUser === "true") {
+        console.log("Redirecting to signup...");
+        router.replace("/signup");
+      } else {
+        console.log("Redirecting to meeting_list...");
+        router.replace("/meeting_list");
+      }
     }
+    // 토큰이 없는 경우 로그인 페이지에 머무름
   }, [router]);
 
   const handleGoogleLogin = () => {
+    // 구글 로그인 엔드포인트로 리다이렉트
     window.location.href =
       "https://everymadcamp-service-320281252015.asia-northeast3.run.app/auth/google";
   };
@@ -74,7 +85,7 @@ const MemorialServiceLanding: React.FC = () => {
         >
           <button
             onClick={handleGoogleLogin}
-            className="w-full bg-transparent text-3xl scale-110 rounded-lg py-4 font-semibold hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
+            className="w-full bg-transparent text-3xl scale-110 rounded-lg py-4 font-semibold hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-white"
           >
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"

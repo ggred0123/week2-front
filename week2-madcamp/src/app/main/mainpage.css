@@ -1,0 +1,26 @@
+/* MemorialServiceLanding.css */
+
+/* Media query for 709px width and 1463px height */
+@media (min-width: 709px) and (max-width: 709px) and (min-height: 1463px) and (max-height: 1463px) {
+  .min-h-screen {
+    height: 1463px; /* Adjust screen height */
+  }
+  .max-w-md {
+    width: 709px; /* Adjust container width */
+  }
+  img.w-full {
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Responsive adjustment */
+  }
+  h1 {
+    font-size: 28px; /* Resize text for smaller screen */
+    line-height: 36px;
+  }
+  .p-8 {
+    padding: 16px; /* Adjust padding */
+  }
+  button {
+    font-size: 14px; /* Smaller text for buttons */
+    padding: 12px; /* Adjust button padding */
+  }
+}

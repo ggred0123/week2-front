@@ -33,7 +33,9 @@ interface CompleteProfileData {
   classId: number;
   mbtiId: number;
   alcoholLevel: number;
+  preferredAlcoholId: number;
   imageUrl: string;
+  leadershipLevel: number;
 }
 
 /**
@@ -73,6 +75,8 @@ export default function CompleteProfilePage() {
     classId: 0,
     mbtiId: 0,
     alcoholLevel: 0,
+    preferredAlcoholId: 1,
+    leadershipLevel: 0,
     imageUrl: "",
   });
 
@@ -114,7 +118,7 @@ export default function CompleteProfilePage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const token = localStorage.getItem("accessToken");
-    console.log("Using token:", token); // 디버깅용
+    console.log("Submitting form data:", formData);
 
     if (!token) return;
 
@@ -130,9 +134,14 @@ export default function CompleteProfilePage() {
           body: JSON.stringify(formData),
         }
       );
+      const responseData = await response.json();
+      console.log("Response status:", response.status);
+      console.log("Response headers:", Object.fromEntries(response.headers));
+      console.log("Response data:", responseData);
 
       if (!response.ok) {
         const errorText = await response.text();
+
         console.error("Profile update failed:", errorText);
         alert("프로필 업데이트 실패: " + errorText);
         return;
@@ -140,7 +149,7 @@ export default function CompleteProfilePage() {
 
       alert("프로필 업데이트 완료!");
       // 완료 후, 홈으로 이동 (또는 원하는 페이지)
-      router.push("/");
+      router.push("/meeting_list");
     } catch (error) {
       console.error("Error completing profile:", error);
       alert("오류 발생: 콘솔에서 확인해주세요");
@@ -306,15 +315,58 @@ export default function CompleteProfilePage() {
             </select>
           </div>
 
-          {/* alcoholLevel (선호 주종) */}
+          {/* alcoholLevel (주량) */}
           <div>
-            <label className="block text-sm font-medium mb-1">선호 주종</label>
+            <label className="block text-sm font-medium mb-1">주량</label>
             <select
               value={formData.alcoholLevel}
               onChange={(e) =>
                 setFormData({
                   ...formData,
                   alcoholLevel: Number(e.target.value),
+                })
+              }
+              className="w-full p-2 border rounded-lg"
+              required
+            >
+              <option value={0}>반병 이하</option>
+              <option value={1}>한병</option>
+              <option value={2}>두병</option>
+              <option value={3}>3병 이상</option>
+            </select>
+          </div>
+
+          {/* leadershipLevel (주량) */}
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              학교에서 임원직 혹은 회장을 해본 경험
+            </label>
+            <select
+              value={formData.leadershipLevel}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  leadershipLevel: Number(e.target.value),
+                })
+              }
+              className="w-full p-2 border rounded-lg"
+              required
+            >
+              <option value={0}>0~1회</option>
+              <option value={1}>2~4회</option>
+              <option value={2}>5회 이상</option>
+            </select>
+          </div>
+
+          {/* preferredAlcoholId (선호 주종) */}
+          <div>
+            <label className="block text-sm font-medium mb-1">선호 주종</label>
+            <select
+              value={formData.preferredAlcoholId}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  preferredAlcoholId: Number(e.target.value),
                 })
               }
               className="w-full p-2 border rounded-lg"

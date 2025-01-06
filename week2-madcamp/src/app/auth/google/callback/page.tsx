@@ -32,7 +32,7 @@ const GoogleCallbackPage = () => {
         router.push("/signup");
       } else {
         console.log("Redirecting to main...");
-        router.push("/");
+        router.push("/meeting_list");
       }
     } else {
       console.error("No access token found in URL parameters");

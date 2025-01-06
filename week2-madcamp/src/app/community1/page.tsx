@@ -8,7 +8,8 @@ import {
   UserCircle,
 } from "lucide-react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import BottomNav from "../components/BottomNav";
 
 interface HeaderProps {
   title: string;
@@ -30,6 +31,11 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+}
+
+interface Community {
+  id: number;
+  title: string;
 }
 
 // Modal Component
@@ -182,55 +188,96 @@ function CommunityCard({ title, icon, bgColor }: MenuItem) {
 
 function CommunityMenu() {
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+  const [communities, setCommunities] = useState<Community[]>([]);
 
-  const menuItems: MenuItem[] = [
-    { title: "현역 게시판", icon: <FlagIcon />, bgColor: "#FCF1EA" },
-    { title: "전체 게시판", icon: <PenIcon />, bgColor: "#EBF3FF" },
-    { title: "개발 공부 게시판", icon: <PenIcon />, bgColor: "#FFE9E9" },
-    { title: "취업/진로 게시판", icon: <FlagIcon />, bgColor: "#FCF1EA" },
-    {
-      title: "kaist 정보 게시판",
-      icon: (
-        <img src="/api/placeholder/32/32" alt="KAIST" className="w-8 h-8" />
-      ),
-      bgColor: "#EBF3FF",
-    },
-    {
-      title: "노션 페이지",
-      icon: "N",
-      bgColor: "#FFE9E9",
-    },
-    { title: "모의 상담", icon: <FlagIcon />, bgColor: "#FCF1EA" },
-    { title: "직무 게시판", icon: <PenIcon />, bgColor: "#EBF3FF" },
-  ];
+  useEffect(() => {
+    const fetchCommunities = async () => {
+      try {
+        const response = await fetch(
+          "https://everymadcamp-service-320281252015.asia-northeast3.run.app/communities"
+        );
+        const data = await response.json();
+        // API 응답에서 communities 배열 추출
+        const communitiesData = data?.Communities || [];
+        setCommunities(communitiesData);
+      } catch (error) {
+        console.error("커뮤니티 데이터 가져오기 오류:", error);
+        setCommunities([]);
+      }
+    };
+
+    fetchCommunities();
+  }, []);
+
+  if (!communities.length) {
+    return <div className="p-6 text-center">로딩 중...</div>;
+  }
 
   return (
     <>
-      <section className="px-6 py-4">
-        <div className="flex items-center gap-2 mb-3">
-          <div className="flex items-center gap-2">
+      <section style={{ padding: "1.5rem 1rem" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            marginBottom: "0.75rem",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <span>📑</span>
-            <h2 className="text-3xl font-bold text-black">Community</h2>
+            <h2
+              style={{
+                fontSize: "1.875rem",
+                fontWeight: "bold",
+                color: "black",
+              }}
+            >
+              Community
+            </h2>
             <img
               src="/api/placeholder/47/42"
               alt="community"
-              className="w-[47px] h-[42px] rounded-[10px]"
+              style={{ width: "47px", height: "42px", borderRadius: "10px" }}
             />
           </div>
-          <button className="ml-auto">
-            <ChevronRight className="w-5 h-5 text-black" />
+          <button style={{ marginLeft: "auto" }}>
+            <ChevronRight
+              style={{ width: "1.25rem", height: "1.25rem", color: "black" }}
+            />
           </button>
         </div>
-        <p className="text-sm text-black mb-4">자유롭게 정보를 공유하세요</p>
-        <div className="flex justify-center">
-          <div className="grid grid-cols-3 gap-y-8 gap-x-[32px] place-items-center">
-            {menuItems.map((item, index) => (
+        <p
+          style={{ fontSize: "0.875rem", color: "black", marginBottom: "1rem" }}
+        >
+          자유롭게 정보를 공유하세요
+        </p>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "2rem 32px",
+              placeItems: "center",
+            }}
+          >
+            {communities.map((community, index) => (
               <div
-                key={index}
-                onClick={() => setSelectedItem(item)}
-                className="cursor-pointer"
+                key={community.id}
+                onClick={() =>
+                  setSelectedItem({
+                    title: community.title,
+                    icon: "📋",
+                    bgColor: "#FFE9E9",
+                  })
+                }
+                style={{ cursor: "pointer" }}
               >
-                <CommunityCard {...item} />
+                <CommunityCard
+                  title={community.title}
+                  icon="📋"
+                  bgColor="#FFE9E9"
+                />
               </div>
             ))}
           </div>
@@ -251,36 +298,13 @@ function CommunityMenu() {
   );
 }
 
-function BottomNavigation() {
-  return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t">
-      <div className="flex justify-around items-center py-3 max-w-[709px] mx-auto">
-        <button>
-          <HandshakeIcon className="w-6 h-6 text-black" />
-        </button>
-        <button>
-          <span>
-            <i className="text-2xl">📄</i>
-          </span>
-        </button>
-        <button>
-          <Bell className="w-6 h-6 text-black" />
-        </button>
-        <button>
-          <UserCircle className="w-6 h-6 text-black" />
-        </button>
-      </div>
-    </nav>
-  );
-}
-
 export default function Page() {
   return (
     <main className="pb-20 bg-white w-[709px] h-[1463px] mx-auto">
       <Header title="Community" />
       <HotPosts />
       <CommunityMenu />
-      <BottomNavigation />
+      <BottomNav />
     </main>
   );
 }
