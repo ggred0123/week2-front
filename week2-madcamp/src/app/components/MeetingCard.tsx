@@ -112,7 +112,7 @@ const MeetingCard: React.FC<MeetingCardProps> = ({
                 height: '8px',
                 flexShrink: 0,
                 marginRight: '5px',
-                marginLeft: '15px',
+                marginLeft: '5px',
                 padding:'3px',
               }}
             >
@@ -128,8 +128,8 @@ const MeetingCard: React.FC<MeetingCardProps> = ({
                 fontStyle: 'normal',
                 fontWeight: 400,
                 lineHeight: 'normal',
-                marginLeft: '13px',
-                padding:'1spx',
+                marginLeft: '15px',
+                marginTop:'16px',
               }}
             >
               {location}
