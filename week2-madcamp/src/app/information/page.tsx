@@ -1,6 +1,6 @@
 import React from 'react';
 import MeetingCard from "../components/MeetingCard";
-import BottomNav from '../components/BottomNav';
+import BottomNav from '../components/BottomNav1';
 
 export default function Information() {
   return (
