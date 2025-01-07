@@ -456,9 +456,12 @@ export default function Information() {
         <MeetingCard
           image="/images/sung_image.jpg"
           title="1월 24일 딸기시루팥"
-          subtitle="Sweet Cakes"
+          description="Sweet Cakes"
           location="성심당 케이부띠끄"
           participants="8/10명"
+          keyword="케이크"
+          startTime="14:00"
+          endTime="16:00"
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"

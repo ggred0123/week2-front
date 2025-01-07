@@ -7,198 +7,227 @@ import BottomNav1 from "../components/BottomNav1";
 import Popup from "../components/Popup";
 import MeetingCard from "../components/MeetingCard";
 
+interface CardData {
+  id: number;
+  hostId: number;
+  title: string;
+  description: string;
+  categoryId: number;
+  meetingImageUrl: string;
+  startTime: string;
+  endTime: string;
+  maxPeople: number;
+  currentPeople: number;
+  location: string;
+  keyword: string;
+}
+
+interface ProcessedCardData {
+  id: number;
+  image: string;
+  title: string;
+  location: string;
+  participants: string;
+  category: number;
+  startTime: string;
+  endTime: string;
+  keyword: string;
+}
+
+interface CenterBoxContent {
+  color: string;
+  icon: "meet" | "exercise" | "drink" | "study";
+  text: string;
+}
+
+interface CategoryStyle {
+  text: string;
+  bg: string;
+}
+
 export default function MeetingListPage() {
-  const [centerBoxContent, setCenterBoxContent] = useState({
+  const [centerBoxContent, setCenterBoxContent] = useState<CenterBoxContent>({
     color: "#FA5D5D",
     icon: "meet",
-    text: "Meet new friend list",
+    text: "Meet new friends",
   });
-
+  // 현재 선택된 카테고리 ID (기본은 -1로 두어 "전체" 취급. 서버 구현에 따라 달라질 수 있음)
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number>(0);
+  // API에서 받아온 데이터(가공 전)
+  const [cardsFromApi, setCardsFromApi] = useState<CardData[]>([]);
+  // 최종 렌더링용 가공된 데이터
+  const [filteredCards, setFilteredCards] = useState<ProcessedCardData[]>([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [filteredCards, setFilteredCards] = useState([]);
 
-  const allCards = [
-    {
-      hostId: 1,
-      title: "딸기시루팥",
-      description: "Meet new friends over sweet cakes!",
-      categoryId: 0,
-      meetingImageUrl: "/images/sung_image.jpg",
-      startTime: "2025-01-07T12:57:27.598Z",
-      endTime: "2025-01-07T14:00:00.000Z",
-      maxPeople: 10,
-      currentPeople: 8,
-      location: "성심당 케이부띠끄",
-      keyword: "strawberry",
-    },
-    {
-      hostId: 2,
-      title: "방어회 먹고싶어요",
-      description: "Let's enjoy fresh sashimi together!",
-      categoryId: 2,
-      meetingImageUrl: "/images/susi_image.jpg",
-      startTime: "2025-01-08T18:00:00.000Z",
-      endTime: "2025-01-08T20:00:00.000Z",
-      maxPeople: 4,
-      currentPeople: 3,
-      location: "신학관 3층 동아리연합회실",
-      keyword: "sashimi",
-    },
-    {
-      hostId: 3,
-      title: "오늘 헬스 갈 사람?",
-      description: "Workout session at the gym!",
-      categoryId: 1,
-      meetingImageUrl: "/images/icecream_image.jpg",
-      startTime: "2025-01-09T10:00:00.000Z",
-      endTime: "2025-01-09T12:00:00.000Z",
-      maxPeople: 5,
-      currentPeople: 2,
-      location: "헬스장 2층",
-      keyword: "fitness",
-    },
-  ];
-
-  const categoryStyles = {
-    0: { text: "var(--Pink, #FA5D5D)", bg: "rgba(250, 93, 93, 0.10)" },
-    1: { text: "var(--Blue-2, #2D9CDB)", bg: "rgba(45, 156, 219, 0.10)" },
-    2: { text: "var(--Purple, #9B51E0)", bg: "rgba(155, 81, 224, 0.10)" },
-    3: { text: "var(--Green-2, #27AE60)", bg: "rgba(39, 174, 96, 0.10)" },
+  // categoryStyles: 각 카테고리에 맞는 스타일(텍스트/배경색)
+  const categoryStyles: Record<number, CategoryStyle> = {
+    0: { text: "#FA5D5D", bg: "rgba(250, 93, 93, 0.10)" },
+    1: { text: "#2D9CDB", bg: "rgba(45, 156, 219, 0.10)" },
+    2: { text: "#9B51E0", bg: "rgba(155, 81, 224, 0.10)" },
+    3: { text: "#27AE60", bg: "rgba(39, 174, 96, 0.10)" },
   };
 
-  const processDBData = (data) => {
+  // 서버에서 받아온 CardData를 필요한 형태로 가공하는 함수
+  const processDBData = (data: CardData): ProcessedCardData => {
     return {
-      id: data.hostId,
+      id: data.id,
+
       image: data.meetingImageUrl,
       title: data.title,
       location: data.location,
-      participants: `${data.currentPeople || 0}/${data.maxPeople}명`,
-      category: data.categoryId, // Use numeric categoryId directly
+      participants: `${data.currentPeople}/${data.maxPeople}명`,
+      category: data.categoryId,
       startTime: new Date(data.startTime).toLocaleString(),
       endTime: new Date(data.endTime).toLocaleString(),
       keyword: data.keyword,
     };
   };
 
-  useEffect(() => {
-    // Show all cards by default
-    setFilteredCards(allCards.map(processDBData));
-  }, []);
-
-  const updateCenterBox = (color, icon, text) => {
+  // 카테고리 변경 시 CenterBox 업데이트
+  const updateCenterBox = (
+    color: string,
+    icon: "meet" | "exercise" | "drink" | "study",
+    text: string
+  ) => {
     setCenterBoxContent({ color, icon, text });
   };
 
-  const handleCategoryChange = (color, _, text) => {
-    const iconMap = {
+  // 카테고리 버튼 클릭 시 실행되는 함수
+  // (카테고리명 -> ID 매핑, CenterBox 내용 업데이트, selectedCategoryId 업데이트)
+  const handleCategoryChange = (color: string, _: any, text: string) => {
+    const iconMap: Record<
+      string,
+      { id: number; icon: "meet" | "exercise" | "drink" | "study" }
+    > = {
       "Meet new friends": { id: 0, icon: "meet" },
       Exercise: { id: 1, icon: "exercise" },
       Drink: { id: 2, icon: "drink" },
       Study: { id: 3, icon: "study" },
     };
-
-    const categoryInfo = iconMap[text] || { id: -1, icon: "meet" };
-
+    // 맵에 없는 경우(전체 등)에는 -1로 처리
+    const categoryInfo = iconMap[text] || { id: 1, icon: "meet" };
     updateCenterBox(color, categoryInfo.icon, text);
+    setSelectedCategoryId(categoryInfo.id);
+  };
 
-    if (categoryInfo.id !== -1) {
-      const filtered = allCards
-        .filter((card) => card.categoryId === categoryInfo.id)
-        .map(processDBData);
-      setFilteredCards(filtered);
-    } else {
-      setFilteredCards(allCards.map(processDBData));
+  // 실제로 서버에서 카드 정보를 가져오는 함수
+  // ex) baseURL을 자신의 API 주소로 맞춰 사용하세요.
+  const fetchCardsFromApi = async (categoryId: number) => {
+    try {
+      const baseUrl =
+        "https://everymadcamp-service-320281252015.asia-northeast3.run.app/meetings";
+      const parsedCategoryId = parseInt(String(categoryId), 10);
+
+      const url =
+        parsedCategoryId === -1
+          ? `${baseUrl}/all`
+          : `${baseUrl}/{categoryId}?categoryId=${parsedCategoryId + 1}`;
+
+      const response = await fetch(url);
+      console.log(categoryId); // 요청 URL 확인
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("API Response:", data); // 응답 구조 확인
+
+      const meetingsData = data.meetings || [];
+      setCardsFromApi(meetingsData);
+    } catch (error) {
+      console.error("Failed to fetch cards:", error);
+      setCardsFromApi([]);
     }
   };
 
-  const togglePopup = () => {
-    setIsPopupOpen((prev) => !prev);
-  };
+  // selectedCategoryId가 변경될 때마다 API를 호출하여 데이터를 새로 가져옴
+  useEffect(() => {
+    fetchCardsFromApi(selectedCategoryId);
+  }, [selectedCategoryId]);
+
+  // cardsFromApi가 바뀔 때마다 필터링/가공하여 최종 렌더링할 데이터를 업데이트
+  useEffect(() => {
+    if (Array.isArray(cardsFromApi) && cardsFromApi.length > 0) {
+      setFilteredCards(cardsFromApi.map(processDBData));
+    } else {
+      setFilteredCards([]);
+    }
+  }, [cardsFromApi]);
+
+  // location 아이콘
+  const locationIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="14"
+      viewBox="0 0 10 12"
+      fill="none"
+      style={{ marginLeft: "-12px" }}
+    >
+      <path
+        d="M10.5 5C10.5 8.5 6 11.5 6 11.5C6 11.5 1.5 8.5 1.5 5C1.5 3.80653 1.97411 2.66193 2.81802 1.81802C3.66193 0.974106 4.80653 0.5 6 0.5C7.19347 0.5 8.33807 0.974106 9.18198 1.81802C10.0259 2.66193 10.5 3.80653 10.5 5Z"
+        fill="#FA5D5D"
+      />
+      <path
+        d="M6 6.5C6.82843 6.5 7.5 5.82843 7.5 5C7.5 4.17157 6.82843 3.5 6 3.5C5.17157 3.5 4.5 4.17157 4.5 5C4.5 5.82843 5.17157 6.5 6 6.5Z"
+        fill="white"
+      />
+    </svg>
+  );
 
   return (
-    <div
-      className="min-h-screen bg-white flex flex-col relative"
-      style={{
-        transform: "scale(0.406)",
-        transformOrigin: "top left",
-        width: "709px",
-        height: "1463px",
-        overflow: "hidden",
-        position: "fixed",
-      }}
-    >
+    <div className="h-[844px] w-[390px] bg-white flex flex-col relative overflow-hidden">
       <Header title="Meeting list" />
-      <div className="px-4 py-2">
-        <CategoryButtons onCategoryChange={handleCategoryChange} />
-      </div>
-      <div className="px-2 py-2">
-        <CenterBox
-          color={centerBoxContent.color}
-          icon={centerBoxContent.icon}
-          text={centerBoxContent.text}
-        />
-      </div>
 
-      {/* Meeting Cards Section */}
-      <div
-        className="px-4 py-4 space-y-4"
-        style={{
-          marginTop: "-90px", // 전체 섹션을 위로 올림
-          marginLeft: "-10px",
-        }}
-      >
-        {filteredCards.map((card) => (
-          <MeetingCard
-            key={card.id}
-            image={card.image}
-            title={card.title}
-            location={
-              <div className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="15"
-                  height="17"
-                  viewBox="0 0 10 12"
-                  fill="none"
-                  
-                  style={{ marginLeft: "-19px" }}
-                >
-                  <path
-                     d="M10.5 5C10.5 8.5 6 11.5 6 11.5C6 11.5 1.5 8.5 1.5 5C1.5 3.80653 1.97411 2.66193 2.81802 1.81802C3.66193 0.974106 4.80653 0.5 6 0.5C7.19347 0.5 8.33807 0.974106 9.18198 1.81802C10.0259 2.66193 10.5 3.80653 10.5 5Z" fill="#FA5D5D"/>
-                     <path d="M6 6.5C6.82843 6.5 7.5 5.82843 7.5 5C7.5 4.17157 6.82843 3.5 6 3.5C5.17157 3.5 4.5 4.17157 4.5 5C4.5 5.82843 5.17157 6.5 6 6.5Z" fill="white"/>
-                </svg>
-                {card.location}
-              </div>
-            }
-            participants={card.participants}
-            subtitleColor={categoryStyles[card.category]?.text}
-            subtitleBgColor={categoryStyles[card.category]?.bg}
-            startTime={card.startTime}
-            endTime={card.endTime}
-            keyword={card.keyword}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* 카테고리 버튼들 */}
+        <div className="px-2 py-1">
+          <CategoryButtons onCategoryChange={handleCategoryChange} />
+        </div>
+
+        {/* 상단 CenterBox */}
+        <div className="px-2 py-1">
+          <CenterBox
+            color={centerBoxContent.color}
+            icon={centerBoxContent.icon}
+            text={centerBoxContent.text}
           />
-        ))}
+        </div>
+
+        {/* 카드 목록 */}
+        <div className="flex-1 overflow-y-auto px-2 space-y-3 pb-20">
+          {filteredCards.map((card) => {
+            // 원본 데이터에서 description만 추가로 가져옴
+            const originalCard = cardsFromApi.find((c) => c.id === card.id);
+
+            return (
+              <MeetingCard
+                key={card.id}
+                image={card.image}
+                title={card.title}
+                icon={locationIcon}
+                location={card.location}
+                participants={card.participants}
+                subtitleColor={categoryStyles[card.category]?.text}
+                subtitleBgColor={categoryStyles[card.category]?.bg}
+                startTime={card.startTime}
+                endTime={card.endTime}
+                keyword={card.keyword}
+                description={originalCard?.description || ""}
+              />
+            );
+          })}
+        </div>
       </div>
 
-      <BottomNav1 />
-
-      {/* Floating + Button */}
+      {/* + 버튼 */}
       <button
-        className="absolute bottom-4 right-4 w-12 h-12 flex items-center justify-center rounded-full shadow-lg bg-pink-500"
-        style={{
-          width: "80px",
-          height: "80px",
-          backgroundColor: "#FA5D5D",
-          position: "absolute",
-          bottom: "160px",
-          right: "30px",
-        }}
-        onClick={togglePopup}
+        className="fixed bottom-20 right-3 w-12 h-12 flex items-center justify-center rounded-full shadow-lg bg-pink-500 z-10"
+        onClick={() => setIsPopupOpen(true)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="80"
-          height="80"
+          width="40"
+          height="40"
           viewBox="0 0 70 70"
           fill="none"
         >
@@ -210,10 +239,15 @@ export default function MeetingListPage() {
         </svg>
       </button>
 
-      {/* Popup */}
-      <Popup isOpen={isPopupOpen} onClose={togglePopup}>
-        <h2 className="text-lg font-bold mb-2">Add New Item</h2>
-        <p className="mb-2 text-sm">This is a placeholder for the popup content.</p>
+      {/* 하단 네비게이션 */}
+      <div className="fixed bottom-0 left-0 right-0 h-16">
+        <BottomNav1 />
+      </div>
+
+      {/* 팝업 예시 */}
+      <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
+        <h2 className="text-base font-bold mb-1">Add New Item</h2>
+        <p className="text-sm">This is a placeholder for the popup content.</p>
       </Popup>
     </div>
   );
