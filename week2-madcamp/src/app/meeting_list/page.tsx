@@ -175,12 +175,21 @@ export default function MeetingListPage() {
   );
 
   return (
-    <div className="h-[844px] w-[390px] bg-white flex flex-col relative overflow-hidden">
+    <div className="h-[844px] w-[390px] bg-white flex flex-col relative overflow-hidden"
+    style={{
+      transform: "scale(0.55,0.4427)", // 288 / 709
+      transformOrigin: "top left", // 스케일 기준점 설정
+      width: "709px", // 스케일로 인해 잘리는 부분 방지
+      height: "1463px", // 높이 비율 조정
+      overflow: "hidden",
+      position: "fixed", // 넘치는 부분 숨김
+    }}
+  >
       <Header title="Meeting list" />
 
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* 카테고리 버튼들 */}
-        <div className="px-2 py-1">
+        <div className="px- py-1">
           <CategoryButtons onCategoryChange={handleCategoryChange} />
         </div>
 
@@ -221,13 +230,20 @@ export default function MeetingListPage() {
 
       {/* + 버튼 */}
       <button
-        className="fixed bottom-20 right-3 w-12 h-12 flex items-center justify-center rounded-full shadow-lg bg-pink-500 z-10"
+        className="fixed bottom-20 right-3 w-8 h-8 flex items-center justify-center rounded-full shadow-lg bg-pink-500 z-10"
+        style={{
+          width: "104px", // 버튼 너비 (기존보다 크거나 작게 설정)
+          height: "104px", // 버튼 높이
+          fontSize: "44px", // 버튼 내부 아이콘 크기 조정
+          right:"30px",
+          bottom:"140px",
+        }}
         onClick={() => setIsPopupOpen(true)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="40"
-          height="40"
+          width="124"
+          height="124"
           viewBox="0 0 70 70"
           fill="none"
         >

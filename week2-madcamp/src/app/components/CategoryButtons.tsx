@@ -8,7 +8,7 @@ interface CategoryButtonsProps {
 export default function CategoryButtons({ onCategoryChange }: CategoryButtonsProps) {
   return (
     <div
-      className="grid grid-cols-2 gap-x-15 gap-y-6 relative"
+      className="grid grid-cols-2 gap-x-6 gap-y-6 relative"
       style={{
         left: '10px',
         padding:'10px',
@@ -18,7 +18,7 @@ export default function CategoryButtons({ onCategoryChange }: CategoryButtonsPro
       <button
         className="relative flex items-center justify-center w-[280px] h-[110px] rounded-[30px]"
         style={{
-          background: "#FBE5E8",
+          background: "#FA5D5D",
         }}
         onClick={() =>
           onCategoryChange(
@@ -51,7 +51,7 @@ export default function CategoryButtons({ onCategoryChange }: CategoryButtonsPro
           <span
             className="ml-16"
             style={{
-              color: "#333",
+              color: "white",
               textAlign: "center",
               fontFamily: "Heebo, sans-serif",
               fontSize: "28px",
@@ -70,7 +70,7 @@ export default function CategoryButtons({ onCategoryChange }: CategoryButtonsPro
       <button
         className="relative flex items-center justify-center w-[280px] h-[110px] rounded-[30px]"
         style={{
-          background: "#DCEBFF",
+          background: "#54A5DA",
         }}
         onClick={() =>
           onCategoryChange(
@@ -102,7 +102,7 @@ export default function CategoryButtons({ onCategoryChange }: CategoryButtonsPro
           <span
             className="ml-11"
             style={{
-              color: "#333",
+              color: "white",
               textAlign: "center",
               fontFamily: "Heebo, sans-serif",
               fontSize: "28px",
@@ -120,7 +120,7 @@ export default function CategoryButtons({ onCategoryChange }: CategoryButtonsPro
       <button
         className="relative flex items-center justify-center w-[280px] h-[110px] rounded-[30px]"
         style={{
-          background: "rgba(239, 209, 255, 0.87)",
+          background: "#D199F0",
         }}
         onClick={() =>
           onCategoryChange(
@@ -159,7 +159,7 @@ export default function CategoryButtons({ onCategoryChange }: CategoryButtonsPro
           <span
             className="ml-9"
             style={{
-              color: "#333",
+              color: "white",
               textAlign: "center",
               fontFamily: "Heebo, sans-serif",
               fontSize: "28px",
@@ -176,7 +176,7 @@ export default function CategoryButtons({ onCategoryChange }: CategoryButtonsPro
       <button
         className="relative flex items-center justify-center w-[280px] h-[110px] rounded-[30px]"
         style={{
-          background: "#EAF9C8",
+          background: "#ABDB43",
         }}
         onClick={() =>
           onCategoryChange(
@@ -213,7 +213,7 @@ export default function CategoryButtons({ onCategoryChange }: CategoryButtonsPro
           <span
             className="ml-9"
             style={{
-              color: "#333",
+              color: "white",
               textAlign: "center",
               fontFamily: "Heebo, sans-serif",
               fontSize: "28px",
