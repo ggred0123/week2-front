@@ -4,8 +4,8 @@ export default function BottomNav4() {
   return (
     <div
       style={{
-        width: "650px",
-        height: "130px",
+        width: "264px",
+        height: "53px",
         flexShrink: 0,
         borderRadius: "36px",
         background: "var(--White, #FFF)",
@@ -17,7 +17,7 @@ export default function BottomNav4() {
       <Link href="/meeting_list">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="45"
+          width="25"
           height="45"
           viewBox="0 0 24 24"
           fill="none"
@@ -28,13 +28,11 @@ export default function BottomNav4() {
           />
         </svg>
       </Link>
-        
-      
 
       <Link href="/recommendation">
-          <svg
+        <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="45"
+          width="25"
           height="45"
           viewBox="0 0 24 24"
           fill="none"
@@ -54,7 +52,7 @@ export default function BottomNav4() {
             strokeLinejoin="round"
           />
           <path
-            d="M16 13H8" 
+            d="M16 13H8"
             stroke="#747474"
             strokeWidth="2"
             strokeLinecap="round"
@@ -74,14 +72,14 @@ export default function BottomNav4() {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-      </svg>
-    </Link>
-    
+        </svg>
+      </Link>
+
       {/* Icon 4 */}
       <Link href="/information">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="48"
+          width="25"
           height="48"
           viewBox="0 0 24 24"
           fill="none"
@@ -100,17 +98,21 @@ export default function BottomNav4() {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="31"
-                height="60"
-                viewBox="0 0 31 60"
-                fill="none"
-            >
-                <path d="M0.5 3H30.5" stroke="#B33BF6" strokeWidth="2" transform="translate(0, 20)"/>
-            </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="31"
+            height="60"
+            viewBox="0 0 31 60"
+            fill="none"
+          >
+            <path
+              d="M0.5 3H30.5"
+              stroke="#B33BF6"
+              strokeWidth="2"
+              transform="translate(0, 20)"
+            />
+          </svg>
         </svg>
-        
       </Link>
     </div>
   );

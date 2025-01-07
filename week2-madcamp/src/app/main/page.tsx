@@ -44,7 +44,7 @@ const MemorialServiceLanding: React.FC = () => {
   };
 
   return (
-    <div className="bg-white" style={{ width: "709px", height: "1463px" }}>
+    <div className="bg-white" style={{ width: "288px", height: "596px" }}>
       <div className="w-full h-full flex flex-col justify-between">
         {/* Top section with image and title */}
         <div className="flex flex-col items-center">

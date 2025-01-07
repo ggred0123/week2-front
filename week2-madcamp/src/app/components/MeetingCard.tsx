@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface MeetingCardProps {
   image: string; // Image URL
@@ -20,27 +20,27 @@ const MeetingCard: React.FC<MeetingCardProps> = ({
   return (
     <div
       style={{
-        width: '600px',
-        height: '200px',
+        width: "244px",
+        height: "81px",
         flexShrink: 0,
-        borderRadius: '16px',
-        background: 'var(--White, #FFF)',
-        boxShadow: '0px 12px 24px 0px rgba(68, 68, 68, 0.10)',
-        display: 'flex',
-        alignItems: 'center',
-        padding: '10px',
-        marginLeft: '35px',
+        borderRadius: "7px",
+        background: "var(--White, #FFF)",
+        boxShadow: "0px 12px 24px 0px rgba(68, 68, 68, 0.10)",
+        display: "flex",
+        alignItems: "center",
+        padding: "10px",
+        marginLeft: "14px",
       }}
     >
       {/* Image Section */}
       <div
         style={{
-          width: '125px',
-          height: '125px',
+          width: "51px",
+          height: "51px",
           flexShrink: 0,
-          borderRadius: '12px',
+          borderRadius: "12px",
           background: `url(${image}) lightgray 0px -0.307px / 100% 158.248% no-repeat`,
-          marginLeft: '15px',
+          marginLeft: "6px",
         }}
       ></div>
 
@@ -48,43 +48,43 @@ const MeetingCard: React.FC<MeetingCardProps> = ({
       <div
         style={{
           flex: 1,
-          marginLeft: '30px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
+          marginLeft: "12px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
         }}
       >
         {/* Title and Subtitle */}
         <div>
           <div
             style={{
-              color: 'var(--Black, #333)',
-              fontFamily: 'Heebo',
-              fontSize: '24px',
-              fontStyle: 'normal',
+              color: "var(--Black, #333)",
+              fontFamily: "Heebo",
+              fontSize: "10px",
+              fontStyle: "normal",
               fontWeight: 700,
-              lineHeight: 'normal',
-              padding: '5px',
+              lineHeight: "normal",
+              padding: "5px",
             }}
           >
             {title}
           </div>
           <div
             style={{
-              display: 'inline-flex',
-              padding: '2px 8px',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '10px',
-              borderRadius: '100px',
-              background: 'rgba(45, 156, 219, 0.10)',
-              color: 'var(--Blue-2, #2D9CDB)',
-              fontFamily: 'Avenir',
-              fontSize: '20px',
-              fontStyle: 'normal',
+              display: "inline-flex",
+              padding: "2px 8px",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "10px",
+              borderRadius: "100px",
+              background: "rgba(45, 156, 219, 0.10)",
+              color: "var(--Blue-2, #2D9CDB)",
+              fontFamily: "Avenir",
+              fontSize: "8px",
+              fontStyle: "normal",
               fontWeight: 400,
-              lineHeight: 'normal',
-              marginLeft: '0px',
+              lineHeight: "normal",
+              marginLeft: "0px",
             }}
           >
             {subtitle}
@@ -94,26 +94,26 @@ const MeetingCard: React.FC<MeetingCardProps> = ({
         {/* Location and Participants */}
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <div
             style={{
-              display: 'flex',
-              alignItems: 'center',
+              display: "flex",
+              alignItems: "center",
             }}
           >
             {/* Icon */}
             <div
               style={{
-                width: '8px',
-                height: '8px',
+                width: "8px",
+                height: "8px",
                 flexShrink: 0,
-                marginRight: '5px',
-                marginLeft: '5px',
-                padding:'3px',
+                marginRight: "5px",
+                marginLeft: "5px",
+                padding: "3px",
               }}
             >
               {icon}
@@ -122,14 +122,14 @@ const MeetingCard: React.FC<MeetingCardProps> = ({
             {/* Location */}
             <div
               style={{
-                color: 'var(--Grey, #747474)',
-                fontFamily: 'ABeeZee',
-                fontSize: '19px',
-                fontStyle: 'normal',
+                color: "var(--Grey, #747474)",
+                fontFamily: "ABeeZee",
+                fontSize: "8px",
+                fontStyle: "normal",
                 fontWeight: 400,
-                lineHeight: 'normal',
-                marginLeft: '15px',
-                marginTop:'16px',
+                lineHeight: "normal",
+                marginLeft: "6px",
+                marginTop: "16px",
               }}
             >
               {location}
@@ -139,14 +139,14 @@ const MeetingCard: React.FC<MeetingCardProps> = ({
           {/* Participants */}
           <div
             style={{
-              color: 'var(--Black, #333)',
-              textAlign: 'right',
-              fontFamily: 'Heebo',
-              fontSize: '18px',
-              fontStyle: 'normal',
+              color: "var(--Black, #333)",
+              textAlign: "right",
+              fontFamily: "Heebo",
+              fontSize: "7px",
+              fontStyle: "normal",
               fontWeight: 700,
-              lineHeight: 'normal',
-              marginLeft: '5px',
+              lineHeight: "normal",
+              marginLeft: "5px",
             }}
           >
             {participants}

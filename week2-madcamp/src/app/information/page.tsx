@@ -8,21 +8,21 @@ export default function Information() {
       style={{
         position: "relative",
         background: "#FEFEFE",
-        width: "709px",
-        height: "1463px",
+        width: "288px",
+        height: "596px",
         overflow: "hidden",
       }}
     >
       {/* Background Circle */}
       <div
         style={{
-          width: "900px",
-          height: "800px",
+          width: "366px",
+          height: "325px",
           borderRadius: "50%",
           background:
             "linear-gradient(135deg, #1FF7FD -57.3%, #B33BF6 51.62%, #FF844C 101.62%, #FF844B 130.58%)",
           position: "absolute",
-          top: "-600px",
+          top: "-244px",
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 1,
@@ -31,12 +31,12 @@ export default function Information() {
       {/* Profile Image */}
       <div
         style={{
-          width: "160px",
-          height: "160px",
+          width: "65px",
+          height: "65px",
           borderRadius: "100px",
           background: "url(<path-to-image>) lightgray 50% / cover no-repeat",
           position: "absolute",
-          top: "128px",
+          top: "52px",
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 2,
@@ -45,17 +45,17 @@ export default function Information() {
       {/* Welcome Text */}
       <div
         style={{
-          width: "320px",
+          width: "130px",
           color: "#40282E",
           textAlign: "center",
           fontFamily: "ABeeZee, sans-serif",
-          fontSize: "42px",
+          fontSize: "17px",
           fontStyle: "normal",
           fontWeight: 400,
-          lineHeight: "36px",
+          lineHeight: "15px",
           letterSpacing: "-0.408px",
           position: "absolute",
-          top: "320px",
+          top: "130px",
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 4,
@@ -68,15 +68,15 @@ export default function Information() {
       {/* Info Box */}
       <div
         style={{
-          width: "550px",
-          height: "400px",
+          width: "223px",
+          height: "180px",
           background: "#F8F8F9",
           borderRadius: "10px",
           position: "absolute",
-          top: "440px",
+          top: "179px",
           left: "50%",
           transform: "translateX(-50%)",
-          padding: "24px",
+          padding: "10px",
           boxSizing: "border-box",
           zIndex: 3,
         }}
@@ -85,12 +85,12 @@ export default function Information() {
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gap: "64px",
-            paddingTop: "32px",
-            paddingLeft: "40px",
+            gap: "26px",
+            paddingTop: "13px",
+            paddingLeft: "16px",
             color: "#40282E",
             fontFamily: "ABeeZee, sans-serif",
-            fontSize: "18px",
+            fontSize: "7px",
             fontWeight: 400,
             lineHeight: "18px",
             letterSpacing: "-0.078px",
@@ -106,8 +106,8 @@ export default function Information() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
+              width="10"
+              height="10"
               viewBox="0 0 18 18"
               fill="none"
             >
@@ -139,8 +139,8 @@ export default function Information() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
+              width="12"
+              height="12"
               viewBox="0 0 21 21"
               fill="none"
             >
@@ -193,8 +193,8 @@ export default function Information() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="33"
+              width="13"
+              height="13"
               viewBox="0 0 24 24"
               fill="none"
             >
@@ -214,8 +214,8 @@ export default function Information() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
+              width="12"
+              height="12"
               viewBox="0 0 20 24"
               fill="none"
             >
@@ -244,8 +244,8 @@ export default function Information() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
+              width="12"
+              height="12"
               viewBox="0 0 24 24"
               fill="none"
             >
@@ -282,8 +282,8 @@ export default function Information() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="27"
-              height="21"
+              width="11"
+              height="9"
               viewBox="0 0 24 16"
               fill="none"
             >
@@ -304,8 +304,8 @@ export default function Information() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="27"
-              height="21"
+              width="11"
+              height="9"
               viewBox="0 0 24 16"
               fill="none"
             >
@@ -321,13 +321,13 @@ export default function Information() {
       {/* Recommended Section */}
       <div
         style={{
-          width: "256px",
+          width: "104px",
           textAlign: "center",
           fontFamily: '"Product Sans", sans-serif',
-          fontSize: "24px",
+          fontSize: "10px",
           color: "#181D2D",
           position: "absolute",
-          top: "890px",
+          top: "362px",
           left: "10%",
           zIndex: 2,
         }}
@@ -338,7 +338,7 @@ export default function Information() {
       <div
         style={{
           position: "absolute",
-          top: "930px",
+          top: "378px",
           left: "47%",
           transform: "translateX(-50%)",
           zIndex: 2,
@@ -353,8 +353,8 @@ export default function Information() {
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width="8"
+              height="8"
               viewBox="0 0 12 12"
               fill="none"
             >
