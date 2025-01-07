@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import MeetingCard from "../components/MeetingCard";
-import BottomNav from "../components/BottomNav4";
 import BottomNav4 from "../components/BottomNav4";
 
 interface UserDto {
@@ -28,7 +27,7 @@ export default function Information() {
   // const userId = router.userId; // 예: /information/[userId]
 
   // 여기서는 예시로 userId를 하드코딩
-  const userId = 28;
+  const userId = 17;
 
   const [user, setUser] = useState<UserDto | null>(null);
 
@@ -141,21 +140,21 @@ export default function Information() {
       style={{
         position: "relative",
         background: "#FEFEFE",
-        width: "288px",
-        height: "596px",
+        width: "390px",
+        height: "844px",
         overflow: "hidden",
       }}
     >
       {/* Background Circle */}
       <div
         style={{
-          width: "366px",
-          height: "325px",
+          width: "495px",
+          height: "461px",
           borderRadius: "50%",
           background:
             "linear-gradient(135deg, #1FF7FD -57.3%, #B33BF6 51.62%, #FF844C 101.62%, #FF844B 130.58%)",
           position: "absolute",
-          top: "-244px",
+          top: "-346px",
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 1,
@@ -164,15 +163,15 @@ export default function Information() {
       {/* Profile Image */}
       <div
         style={{
-          width: "65px",
-          height: "65px",
+          width: "88px",
+          height: "88px",
           borderRadius: "100px",
           // user.imageUrl 이 존재하면 해당 url로 대체
           background: `url(${
             user.imageUrl || "/images/google_logo.png"
           }) lightgray 50% / cover no-repeat`,
           position: "absolute",
-          top: "52px",
+          top: "74px",
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 2,
@@ -181,17 +180,17 @@ export default function Information() {
       {/* Welcome Text */}
       <div
         style={{
-          width: "130px",
+          width: "176px",
           color: "#40282E",
           textAlign: "center",
           fontFamily: "ABeeZee, sans-serif",
-          fontSize: "17px",
+          fontSize: "23px",
           fontStyle: "normal",
           fontWeight: 400,
           lineHeight: "15px",
           letterSpacing: "-0.408px",
           position: "absolute",
-          top: "130px",
+          top: "185px",
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 4,
@@ -199,20 +198,21 @@ export default function Information() {
       >
         Welcome
         <br />
+        <br />
         {user.name}
       </div>
       {/* Info Box */}
       <div
         style={{
-          width: "223px",
-          height: "180px",
+          width: "301px",
+          height: "255px",
           background: "#F8F8F9",
           borderRadius: "10px",
           position: "absolute",
-          top: "179px",
+          top: "254px",
           left: "50%",
           transform: "translateX(-50%)",
-          padding: "10px",
+          padding: "14px",
           boxSizing: "border-box",
           zIndex: 3,
         }}
@@ -221,12 +221,12 @@ export default function Information() {
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gap: "26px",
-            paddingTop: "13px",
-            paddingLeft: "16px",
+            gap: "35px",
+            paddingTop: "18px",
+            paddingLeft: "22px",
             color: "#40282E",
             fontFamily: "ABeeZee, sans-serif",
-            fontSize: "7px",
+            fontSize: "9px",
             fontWeight: 400,
             lineHeight: "18px",
             letterSpacing: "-0.078px",
@@ -236,8 +236,8 @@ export default function Information() {
           <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
+              width="14"
+              height="14"
               viewBox="0 0 18 18"
               fill="none"
             >
@@ -258,14 +258,14 @@ export default function Information() {
                 strokeWidth="2"
               />
             </svg>
-            <span style={{ marginLeft: "12px" }}>{sexToKorean(user.sex)}</span>
+            <span style={{ marginLeft: "16px" }}>{sexToKorean(user.sex)}</span>
           </div>
           {/* MBTI */}
           <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="12"
-              height="12"
+              width="16"
+              height="16"
               viewBox="0 0 21 21"
               fill="none"
             >
@@ -306,7 +306,7 @@ export default function Information() {
                 <path d="M-1 -1H23V23H-1V-1Z" fill="black" />
               </g>
             </svg>
-            <span style={{ marginLeft: "12px" }}>
+            <span style={{ marginLeft: "16px" }}>
               {mbtiToString(user.mbtiId)}
             </span>
           </div>
@@ -314,8 +314,8 @@ export default function Information() {
           <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="13"
-              height="13"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
               fill="none"
             >
@@ -324,7 +324,7 @@ export default function Information() {
                 fill="black"
               />
             </svg>
-            <span style={{ marginLeft: "12px" }}>
+            <span style={{ marginLeft: "16px" }}>
               {user.birthday.split("T")[0]}
             </span>
           </div>
@@ -332,8 +332,8 @@ export default function Information() {
           <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="12"
-              height="12"
+              width="16"
+              height="16"
               viewBox="0 0 20 24"
               fill="none"
             >
@@ -350,7 +350,7 @@ export default function Information() {
                 fill="black"
               />
             </svg>
-            <span style={{ marginLeft: "12px" }}>
+            <span style={{ marginLeft: "16px" }}>
               {classIdToKorean(user.classId)}
             </span>
           </div>
@@ -358,8 +358,8 @@ export default function Information() {
           <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="12"
-              height="12"
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
               fill="none"
             >
@@ -385,7 +385,7 @@ export default function Information() {
                 strokeLinejoin="round"
               />
             </svg>
-            <span style={{ marginLeft: "12px" }}>
+            <span style={{ marginLeft: "16px" }}>
               {universityToString(user.universityId)}
             </span>
           </div>
@@ -393,8 +393,8 @@ export default function Information() {
           <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="11"
-              height="9"
+              width="15"
+              height="12"
               viewBox="0 0 24 16"
               fill="none"
             >
@@ -403,7 +403,7 @@ export default function Information() {
                 fill="black"
               />
             </svg>
-            <span style={{ marginLeft: "12px" }}>
+            <span style={{ marginLeft: "16px" }}>
               {madCampStatusToKorean(user.madCampStatus)}
             </span>
           </div>
@@ -411,8 +411,8 @@ export default function Information() {
           <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="11"
-              height="9"
+              width="15"
+              height="12"
               viewBox="0 0 24 16"
               fill="none"
             >
@@ -421,7 +421,7 @@ export default function Information() {
                 fill="black"
               />
             </svg>
-            <span style={{ marginLeft: "12px" }}>
+            <span style={{ marginLeft: "16px" }}>
               {user.programmingField || "전산학부"}
             </span>
           </div>
@@ -433,10 +433,10 @@ export default function Information() {
           width: "104px",
           textAlign: "center",
           fontFamily: '"Product Sans", sans-serif',
-          fontSize: "10px",
+          fontSize: "14px",
           color: "#181D2D",
           position: "absolute",
-          top: "362px",
+          top: "514px",
           left: "10%",
           zIndex: 2,
         }}
@@ -447,7 +447,7 @@ export default function Information() {
       <div
         style={{
           position: "absolute",
-          top: "378px",
+          top: "537px",
           left: "47%",
           transform: "translateX(-50%)",
           zIndex: 2,
@@ -462,8 +462,8 @@ export default function Information() {
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="8"
-              height="8"
+              width="11"
+              height="11"
               viewBox="0 0 12 12"
               fill="none"
             >
@@ -488,7 +488,7 @@ export default function Information() {
           zIndex: 5,
         }}
       >
-        <BottomNav />
+        <BottomNav4 />
       </div>
     </div>
   );

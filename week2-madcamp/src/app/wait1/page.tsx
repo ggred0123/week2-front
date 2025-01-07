@@ -22,7 +22,7 @@ export default function Wait1() {
         const response = await fetch(url, {
           method: "GET",
           headers: {
-            "x-user-id": "20",
+            "x-user-id": "17",
           },
         });
 

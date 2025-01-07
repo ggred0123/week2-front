@@ -13,18 +13,15 @@ const GoogleCallbackPage = () => {
 
     // 디버깅을 위한 로그 추가
     console.log("URL Parameters:", {
-      userId: params.get("userId"),
       accessToken: params.get("accessToken"),
       isNewUser: params.get("isNewUser"),
     });
 
     const encodedToken = params.get("accessToken");
 
-    if (encodedToken && userId) {
+    if (encodedToken) {
       const accessToken = decodeURIComponent(encodedToken);
       localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("userId", userId);
-
       // 저장 직후 확인을 위한 로그
       console.log("Stored in localStorage:", {
         userId: localStorage.getItem("userId"),
