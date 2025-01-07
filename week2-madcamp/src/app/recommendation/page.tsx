@@ -9,7 +9,7 @@ export default function Recommendation() {
     <div
       className="min-h-screen bg-white flex flex-col relative"
       style={{
-        transform: "scale(0.55)", // 288 / 709
+        transform: "scale(0.55,0.4427)", // 288 / 709
         transformOrigin: "top left", // 스케일 기준점 설정
         width: "709px", // 스케일로 인해 잘리는 부분 방지
         height: "1463px", // 높이 비율 조정
@@ -24,7 +24,7 @@ export default function Recommendation() {
         {/* 이미지 섹션 */}
         <div
           style={{
-            width: "350px",
+            width: "300px",
             height: "300px",
             flexShrink: 0,
             borderRadius: "15px",
@@ -87,7 +87,7 @@ export default function Recommendation() {
             boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
             padding: "5px",
             marginTop: "0px",
-            marginBottom: "50px",
+            marginBottom: "-50px",
           }}
           className="flex flex-col items-center"
         >
