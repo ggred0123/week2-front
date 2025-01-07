@@ -161,7 +161,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 출발 시간
               </label>
               <input
-                type="time"
+                type="datetime-local"
                 name="startTime"
                 value={formData.startTime}
                 onChange={handleChange}
@@ -173,7 +173,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 종료 시간
               </label>
               <input
-                type="time"
+                type="datetime-local"
                 name="endTime"
                 value={formData.endTime}
                 onChange={handleChange}

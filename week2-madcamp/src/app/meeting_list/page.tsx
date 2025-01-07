@@ -1,29 +1,114 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import CategoryButtons from "../components/CategoryButtons";
 import CenterBox from "../components/CenterBox";
 import BottomNav1 from "../components/BottomNav1";
-import Popup from "../components/Popup"; // Popup 컴포넌트 임포트
+import Popup from "../components/Popup";
+import MeetingCard from "../components/MeetingCard";
+
 export default function MeetingListPage() {
-  const [centerBoxContent, setCenterBoxContent] = useState<{
-    color: string;
-    icon: "meet" | "exercise" | "drink" | "study";
-    text: string;
-  }>({
+  const [centerBoxContent, setCenterBoxContent] = useState({
     color: "#FA5D5D",
     icon: "meet",
     text: "Meet new friend list",
   });
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false); // 팝업 상태 관리
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [filteredCards, setFilteredCards] = useState([]);
 
-  const updateCenterBox = (
-    color: string,
-    icon: "meet" | "exercise" | "drink" | "study",
-    text: string
-  ) => {
+  const allCards = [
+    {
+      hostId: 1,
+      title: "딸기시루팥",
+      description: "Meet new friends over sweet cakes!",
+      categoryId: 0,
+      meetingImageUrl: "/images/sung_image.jpg",
+      startTime: "2025-01-07T12:57:27.598Z",
+      endTime: "2025-01-07T14:00:00.000Z",
+      maxPeople: 10,
+      currentPeople: 8,
+      location: "성심당 케이부띠끄",
+      keyword: "strawberry",
+    },
+    {
+      hostId: 2,
+      title: "방어회 먹고싶어요",
+      description: "Let's enjoy fresh sashimi together!",
+      categoryId: 2,
+      meetingImageUrl: "/images/susi_image.jpg",
+      startTime: "2025-01-08T18:00:00.000Z",
+      endTime: "2025-01-08T20:00:00.000Z",
+      maxPeople: 4,
+      currentPeople: 3,
+      location: "신학관 3층 동아리연합회실",
+      keyword: "sashimi",
+    },
+    {
+      hostId: 3,
+      title: "오늘 헬스 갈 사람?",
+      description: "Workout session at the gym!",
+      categoryId: 1,
+      meetingImageUrl: "/images/icecream_image.jpg",
+      startTime: "2025-01-09T10:00:00.000Z",
+      endTime: "2025-01-09T12:00:00.000Z",
+      maxPeople: 5,
+      currentPeople: 2,
+      location: "헬스장 2층",
+      keyword: "fitness",
+    },
+  ];
+
+  const categoryStyles = {
+    0: { text: "var(--Pink, #FA5D5D)", bg: "rgba(250, 93, 93, 0.10)" },
+    1: { text: "var(--Blue-2, #2D9CDB)", bg: "rgba(45, 156, 219, 0.10)" },
+    2: { text: "var(--Purple, #9B51E0)", bg: "rgba(155, 81, 224, 0.10)" },
+    3: { text: "var(--Green-2, #27AE60)", bg: "rgba(39, 174, 96, 0.10)" },
+  };
+
+  const processDBData = (data) => {
+    return {
+      id: data.hostId,
+      image: data.meetingImageUrl,
+      title: data.title,
+      location: data.location,
+      participants: `${data.currentPeople || 0}/${data.maxPeople}명`,
+      category: data.categoryId, // Use numeric categoryId directly
+      startTime: new Date(data.startTime).toLocaleString(),
+      endTime: new Date(data.endTime).toLocaleString(),
+      keyword: data.keyword,
+    };
+  };
+
+  useEffect(() => {
+    // Show all cards by default
+    setFilteredCards(allCards.map(processDBData));
+  }, []);
+
+  const updateCenterBox = (color, icon, text) => {
     setCenterBoxContent({ color, icon, text });
+  };
+
+  const handleCategoryChange = (color, _, text) => {
+    const iconMap = {
+      "Meet new friends": { id: 0, icon: "meet" },
+      Exercise: { id: 1, icon: "exercise" },
+      Drink: { id: 2, icon: "drink" },
+      Study: { id: 3, icon: "study" },
+    };
+
+    const categoryInfo = iconMap[text] || { id: -1, icon: "meet" };
+
+    updateCenterBox(color, categoryInfo.icon, text);
+
+    if (categoryInfo.id !== -1) {
+      const filtered = allCards
+        .filter((card) => card.categoryId === categoryInfo.id)
+        .map(processDBData);
+      setFilteredCards(filtered);
+    } else {
+      setFilteredCards(allCards.map(processDBData));
+    }
   };
 
   const togglePopup = () => {
@@ -34,30 +119,17 @@ export default function MeetingListPage() {
     <div
       className="min-h-screen bg-white flex flex-col relative"
       style={{
-        transform: "scale(0.406)", // 288 / 709
-        transformOrigin: "top left", // 스케일 기준점 설정
-        width: "709px", // 스케일로 인해 잘리는 부분 방지
-        height: "1463px", // 높이 비율 조정
-        overflow: "hidden",  position: "fixed",// 넘치는 부분 숨김
+        transform: "scale(0.406)",
+        transformOrigin: "top left",
+        width: "709px",
+        height: "1463px",
+        overflow: "hidden",
+        position: "fixed",
       }}
     >
       <Header title="Meeting list" />
       <div className="px-4 py-2">
-        <CategoryButtons
-          onCategoryChange={(color, _, text) => {
-            const iconMap: Record<
-              string,
-              "meet" | "exercise" | "drink" | "study"
-            > = {
-              "Meet new friends": "meet",
-              Exercise: "exercise",
-              Drink: "drink",
-              Study: "study",
-            };
-            const iconKey = iconMap[text] || "meet";
-            updateCenterBox(color, iconKey, text);
-          }}
-        />
+        <CategoryButtons onCategoryChange={handleCategoryChange} />
       </div>
       <div className="px-2 py-2">
         <CenterBox
@@ -66,25 +138,67 @@ export default function MeetingListPage() {
           text={centerBoxContent.text}
         />
       </div>
+
+      {/* Meeting Cards Section */}
+      <div
+        className="px-4 py-4 space-y-4"
+        style={{
+          marginTop: "-90px", // 전체 섹션을 위로 올림
+          marginLeft: "-10px",
+        }}
+      >
+        {filteredCards.map((card) => (
+          <MeetingCard
+            key={card.id}
+            image={card.image}
+            title={card.title}
+            location={
+              <div className="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="17"
+                  viewBox="0 0 10 12"
+                  fill="none"
+                  
+                  style={{ marginLeft: "-19px" }}
+                >
+                  <path
+                     d="M10.5 5C10.5 8.5 6 11.5 6 11.5C6 11.5 1.5 8.5 1.5 5C1.5 3.80653 1.97411 2.66193 2.81802 1.81802C3.66193 0.974106 4.80653 0.5 6 0.5C7.19347 0.5 8.33807 0.974106 9.18198 1.81802C10.0259 2.66193 10.5 3.80653 10.5 5Z" fill="#FA5D5D"/>
+                     <path d="M6 6.5C6.82843 6.5 7.5 5.82843 7.5 5C7.5 4.17157 6.82843 3.5 6 3.5C5.17157 3.5 4.5 4.17157 4.5 5C4.5 5.82843 5.17157 6.5 6 6.5Z" fill="white"/>
+                </svg>
+                {card.location}
+              </div>
+            }
+            participants={card.participants}
+            subtitleColor={categoryStyles[card.category]?.text}
+            subtitleBgColor={categoryStyles[card.category]?.bg}
+            startTime={card.startTime}
+            endTime={card.endTime}
+            keyword={card.keyword}
+          />
+        ))}
+      </div>
+
       <BottomNav1 />
 
       {/* Floating + Button */}
       <button
         className="absolute bottom-4 right-4 w-12 h-12 flex items-center justify-center rounded-full shadow-lg bg-pink-500"
         style={{
-          width: "72px",
-          height: "72px",
+          width: "80px",
+          height: "80px",
           backgroundColor: "#FA5D5D",
           position: "absolute",
-          bottom: "20px",
-          right: "20px",
+          bottom: "160px",
+          right: "30px",
         }}
         onClick={togglePopup}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="40"
-          height="40"
+          width="80"
+          height="80"
           viewBox="0 0 70 70"
           fill="none"
         >
