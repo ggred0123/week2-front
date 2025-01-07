@@ -10,6 +10,7 @@ export default function BottomNav4() {
         borderRadius: "36px",
         background: "var(--White, #FFF)",
         boxShadow: "0px 0px 32px 0px rgba(0, 0, 0, 0.10)",
+        bottom: "30px",
       }}
       className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex justify-around items-center"
     >

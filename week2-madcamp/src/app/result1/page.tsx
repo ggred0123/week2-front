@@ -41,7 +41,7 @@ export default function MatchingSuccess1() {
       display: "flex",
       flexDirection: "column",
       position: "relative",
-      transform: "scale(0.406)", // 288 / 709
+      transform: "scale(0.55,0.4427)", // 288 / 709
       transformOrigin: "top left", // 스케일 기준점 설정
       width: "709px", // 스케일로 인해 잘리는 부분 방지
       height: "1463px", // 높이 비율 조정
@@ -80,14 +80,14 @@ export default function MatchingSuccess1() {
     profileCard: {
       width: "90%",
       maxWidth: "500px",
-      height: "700px",
+      height: "500px",
       background: "#FCEBF8",
       borderRadius: "15px",
       boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      marginTop: "10px",
+      marginTop: "115px",
       gap: "16px",
     },
     profileImage: {
@@ -143,25 +143,27 @@ export default function MatchingSuccess1() {
         <div style={styles.profileCard}>
           {/* 프로필 이미지 */}
           {matchedUser?.image_url && (
-            <Image
-              src={matchedUser.image_url}
-              alt="프로필"
-              width={300} // 이미지 너비
-              height={300}
-              style={styles.profileImage}
-            />
+            <>
+              <Image
+                src={matchedUser.image_url}
+                alt="프로필"
+                width={300} // 이미지 너비
+                height={300}
+                style={styles.profileImage}
+              />
+              {/* 이름 */}
+              <h3 style={styles.profileName}>
+                {matchedUser?.name || "매칭된 스터디메이트"}
+              </h3>
+              <p style={styles.profileDescription}>
+                {matchedUser?.major && `${matchedUser.major} `}
+                <br />
+                {matchDetails?.reasoning}
+                <br />
+                {matchDetails?.recommendation}
+              </p>
+            </>
           )}
-          {/* 프로필 이름과 설명 */}
-          <h3 style={styles.profileName}>
-            {matchedUser?.name || "매칭된 스터디메이트"}
-          </h3>
-          <p style={styles.profileDescription}>
-            {matchedUser?.major && `${matchedUser.major} `}
-            <br />
-            {matchDetails?.reasoning}
-            <br />
-            {matchDetails?.recommendation}
-          </p>
         </div>
       </main>
 
