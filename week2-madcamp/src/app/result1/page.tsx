@@ -13,6 +13,11 @@ export default function MatchingSuccess1() {
       display: "flex",
       flexDirection: "column",
       position: "relative",
+      transform: "scale(0.406)", // 288 / 709
+      transformOrigin: "top left", // 스케일 기준점 설정
+      width: "709px", // 스케일로 인해 잘리는 부분 방지
+      height: "1463px", // 높이 비율 조정
+      overflow: "hidden",
     },
     main: {
       flexGrow: 1,
@@ -100,6 +105,8 @@ export default function MatchingSuccess1() {
             <Image
               src="/images/success_icon.png" // 성공 이미지를 여기에 추가
               alt="매칭 성공"
+              width={350} // 이미지 너비
+              height={350}
               style={styles.successImage}
             />
           </div>
@@ -113,6 +120,8 @@ export default function MatchingSuccess1() {
           <Image
             src="/images/face_genius.jpg" // 사용자 프로필 이미지를 여기에 추가
             alt="프로필"
+            width={350} // 이미지 너비
+            height={350}
             style={styles.profileImage}
           />
           {/* 이름 */}

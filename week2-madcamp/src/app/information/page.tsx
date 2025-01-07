@@ -34,7 +34,7 @@ export default function Information() {
           width: "65px",
           height: "65px",
           borderRadius: "100px",
-          background: "url(<path-to-image>) lightgray 50% / cover no-repeat",
+          background: "url(/images/google_logo.png) lightgray 50% / cover no-repeat",
           position: "absolute",
           top: "52px",
           left: "50%",
