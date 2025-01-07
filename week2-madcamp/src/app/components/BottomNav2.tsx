@@ -32,83 +32,62 @@ export default function BottomNav2() {
       
 
       {/* Icon 2 */}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="45"
-        height="45"
-        viewBox="0 0 24 24"
-        fill="none"
-      >
-        <path
-          d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z"
-          stroke="#A53FDE"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M14 2V8H20"
-          stroke="#A53FDE"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M16 13H8" 
-          stroke="#A53FDE"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M16 17H8"
-          stroke="#A53FDE"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M10 9H9H8"
-          stroke="#A53FDE"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="31"
-            height="60"
-            viewBox="0 0 31 60"
-            fill="none"
-          >
-            <path d="M0.5 3H30.5" stroke="#B33BF6" strokeWidth="2" transform="translate(0, 20)"/>
-        </svg>
-    </svg>
-
-      {/* Icon 3 */}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="45"
-        height="45"
-        viewBox="0 0 24 24"
-        fill="none"
-      >
-        <path
-          d="M18 8C18 6.4087 17.3679 4.88258 16.2426 3.75736C15.1174 2.63214 13.5913 2 12 2C10.4087 2 8.88258 2.63214 7.75736 3.75736C6.63214 4.88258 6 6.4087 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z"
-          stroke="#747474"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M13.73 21C13.5542 21.3031 13.3018 21.5547 12.9982 21.7295C12.6946 21.9044 12.3504 21.9965 12 21.9965C11.6496 21.9965 11.3054 21.9044 11.0018 21.7295C10.6981 21.5547 10.4458 21.3031 10.27 21"
-          stroke="#747474"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+      <Link href="/recommendation">
+          <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="45"
+          height="45"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z"
+            stroke="#A53FDE"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M14 2V8H20"
+            stroke="#A53FDE"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M16 13H8" 
+            stroke="#A53FDE"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M16 17H8"
+            stroke="#A53FDE"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M10 9H9H8"
+            stroke="#A53FDE"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="31"
+              height="60"
+              viewBox="0 0 31 60"
+              fill="none"
+            >
+              <path d="M0.5 3H30.5" stroke="#B33BF6" strokeWidth="2" transform="translate(0, 20)"/>
+          </svg>
       </svg>
+    </Link>
 
+      
       {/* Icon 4 */}
       <Link href="/information">
         <svg
