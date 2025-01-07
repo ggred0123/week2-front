@@ -13,7 +13,6 @@ export default function Information() {
         overflow: "hidden",
       }}
     >
-      //
       {/* Background Circle */}
       <div
         style={{
@@ -26,7 +25,7 @@ export default function Information() {
           top: "-600px",
           left: "50%",
           transform: "translateX(-50%)",
-          zIndex: 0,
+          zIndex: 1,
         }}
       />
       {/* Profile Image */}
