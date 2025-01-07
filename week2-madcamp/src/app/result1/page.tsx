@@ -142,15 +142,16 @@ export default function MatchingSuccess1() {
 
         <div style={styles.profileCard}>
           {/* 프로필 이미지 */}
-        {matchedUser?.image_url && (
-          <Image
-            src={matchedUser.image_url}
-            alt="프로필"
-            width={300} // 이미지 너비
-            height={300}
-            style={styles.profileImage}
-          />
-          {/* 이름 */}
+          {matchedUser?.image_url && (
+            <Image
+              src={matchedUser.image_url}
+              alt="프로필"
+              width={300} // 이미지 너비
+              height={300}
+              style={styles.profileImage}
+            />
+          )}
+          {/* 프로필 이름과 설명 */}
           <h3 style={styles.profileName}>
             {matchedUser?.name || "매칭된 스터디메이트"}
           </h3>
