@@ -687,7 +687,7 @@ export default function CompleteProfilePage() {
             style={{
               width: "100%",
               marginTop: "2rem",
-              backgroundColor: "#1D4ED8",
+              backgroundColor: "pink",
               color: "white",
               fontWeight: "600",
               padding: "8px 16px",

@@ -97,13 +97,13 @@ function UploadExample({ onUpload }: UploadExampleProps) {
             file:mr-4 file:py-2 file:px-4
             file:rounded-full file:border-0
             file:text-sm file:font-semibold
-            file:bg-blue-50 file:text-blue-700
-            hover:file:bg-blue-100"
+            file:bg-pink-50 file:text-pink-700
+            hover:file:bg-pink-100"
         />
         <button
           onClick={handleUpload}
           disabled={!selectedFile || uploading}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg disabled:opacity-50"
+          className="px-4 py-2 bg-pink-600 text-white rounded-lg disabled:opacity-50"
         >
           {uploading ? "업로드 중..." : "업로드"}
         </button>

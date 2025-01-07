@@ -5,7 +5,7 @@ interface MeetingCardProps {
   title: string; // Main text
   icon: React.ReactNode; // SVG icon
   location: string; // Location text
-  subtitle: string;
+  description: string; // Description text
   participants: string; // Participant text
   keyword?: string; // Text color and background color for the tag
   subtitleColor?: string; // Text color for keyword
@@ -21,7 +21,6 @@ const MeetingCard: React.FC<MeetingCardProps> = ({
   location,
   participants,
   keyword,
-  subtitle,
   subtitleColor,
   subtitleBgColor,
   startTime,

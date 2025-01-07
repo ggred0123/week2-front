@@ -94,7 +94,7 @@ export default function MeetingListPage() {
 
   // 카테고리 버튼 클릭 시 실행되는 함수
   // (카테고리명 -> ID 매핑, CenterBox 내용 업데이트, selectedCategoryId 업데이트)
-  const handleCategoryChange = (color: string, _: any, text: string) => {
+  const handleCategoryChange = (color: string, _: unknown, text: string) => {
     const iconMap: Record<
       string,
       { id: number; icon: "meet" | "exercise" | "drink" | "study" }
