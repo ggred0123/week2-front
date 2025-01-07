@@ -9,11 +9,12 @@ export default function Recommendation() {
     <div
       className="min-h-screen bg-white flex flex-col relative"
       style={{
-        transform: "scale(0.406)", // 288 / 709
+        transform: "scale(0.55)", // 288 / 709
         transformOrigin: "top left", // 스케일 기준점 설정
         width: "709px", // 스케일로 인해 잘리는 부분 방지
         height: "1463px", // 높이 비율 조정
-        overflow: "hidden",  position: "fixed",// 넘치는 부분 숨김
+        overflow: "hidden",
+        position: "fixed", // 넘치는 부분 숨김
       }}
     >
       <Header title="Matching System" />
@@ -24,11 +25,12 @@ export default function Recommendation() {
         <div
           style={{
             width: "350px",
-            height: "350px",
+            height: "300px",
             flexShrink: 0,
             borderRadius: "15px",
-            background: 'url(/images/black_nub.jpg) lightgray 50% / cover no-repeat',
-            marginTop: "50px",
+            background:
+              "url(/images/black_nub.jpg) lightgray 50% / cover no-repeat",
+            marginTop: "-200px",
           }}
         ></div>
 
@@ -85,7 +87,7 @@ export default function Recommendation() {
             boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
             padding: "5px",
             marginTop: "0px",
-            marginBottom: "90px",
+            marginBottom: "50px",
           }}
           className="flex flex-col items-center"
         >

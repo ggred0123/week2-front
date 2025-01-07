@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import MeetingCard from "../components/MeetingCard";
-import BottomNav4 from "../components/BottomNav4";
+import BottomNav2 from "../components/BottomNav4";
 
 interface UserDto {
   id: number;
@@ -479,17 +479,7 @@ export default function Information() {
           }
         />
       </div>
-      {/* Bottom Navigation */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          width: "100%",
-          zIndex: 5,
-        }}
-      >
-        <BottomNav4 />
-      </div>
+      <BottomNav2 />
     </div>
   );
 }
