@@ -1,8 +1,141 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MeetingCard from "../components/MeetingCard";
 import BottomNav from "../components/BottomNav4";
+import BottomNav4 from "../components/BottomNav4";
+
+interface UserDto {
+  id: number;
+  universityId: number;
+  alcoholLevel: number;
+  madCampStatus: "InCamp" | "BeforeCamp" | "FinishedCamp";
+  sex: "MALE" | "FEMALE";
+  mbtiId: number; // 혹은 "ENFP", "ISTJ" 등 문자열이라면 string
+  classId: number;
+  imageUrl: string;
+  name: string;
+  birthday: string; // "2025-01-07T13:15:07.769Z" 형태
+  leadershipLevel: number;
+  preferredAlcoholId: number;
+  programmingLevel: number;
+  programmingField: string;
+  programmingLanguage: string;
+}
+
 export default function Information() {
+  // 만약 라우트 파라미터로 userId를 받는다면 사용 (Next.js 13 App Router 기준)
+  // const router = useParams();
+  // const userId = router.userId; // 예: /information/[userId]
+
+  // 여기서는 예시로 userId를 하드코딩
+  const userId = 28;
+
+  const [user, setUser] = useState<UserDto | null>(null);
+
+  useEffect(() => {
+    async function fetchUserData() {
+      try {
+        const response = await fetch(
+          `https://everymadcamp-service-320281252015.asia-northeast3.run.app/users/${userId}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+        const data: UserDto = await response.json();
+        setUser(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchUserData();
+  }, [userId]);
+
+  // 'birthday'로 나이를 계산하는 간단 예시 (태어난 해 기준)
+
+  // sex 필드가 "MALE"이면 "남성", "FEMALE"이면 "여성"
+  const sexToKorean = (sex?: "MALE" | "FEMALE") => {
+    switch (sex) {
+      case "MALE":
+        return "남성";
+      case "FEMALE":
+        return "여성";
+      default:
+        return "";
+    }
+  };
+
+  // madCampStatus가 "InCamp" 이면 "캠프중"으로 표시
+  const madCampStatusToKorean = (
+    status?: "InCamp" | "BeforeCamp" | "FinishedCamp"
+  ) => {
+    switch (status) {
+      case "InCamp":
+        return "캠프중";
+      case "BeforeCamp":
+        return "캠프 전";
+      case "FinishedCamp":
+        return "캠프 완료";
+      default:
+        return "";
+    }
+  };
+
+  // 분반(classId)이 예: 0이면 "1분반", 1이면 "2분반", 등
+  const classIdToKorean = (classId?: number) => {
+    // 실제로는 API 스펙에 맞춰 수정
+    if (classId === 0) return "1분반";
+    if (classId === 1) return "2분반";
+    if (classId === 2) return "2분반";
+    if (classId === 3) return "2분반";
+    return "";
+  };
+
+  // 예: MBTI를 id로 주는 대신 문자열로 주는 경우, 그대로 표시
+  // 여기서는 mbtiId가 0이라면 "ENFP"라고 가정
+  const mbtiToString = (mbtiId?: number) => {
+    if (mbtiId === 1) return "ISTJ";
+    if (mbtiId === 2) return "ISFJ";
+    if (mbtiId === 3) return "INFJ";
+    if (mbtiId === 4) return "INTJ";
+    if (mbtiId === 5) return "ISTP";
+    if (mbtiId === 6) return "ISFP";
+    if (mbtiId === 7) return "INFP";
+    if (mbtiId === 8) return "INTP";
+    if (mbtiId === 9) return "ESTP";
+    if (mbtiId === 10) return "ESFP";
+    if (mbtiId === 11) return "ENFP";
+    if (mbtiId === 12) return "ENTP";
+    if (mbtiId === 13) return "ESTJ";
+    if (mbtiId === 14) return "ESFJ";
+    if (mbtiId === 15) return "ENFJ";
+    if (mbtiId === 16) return "ENTJ";
+
+    // 필요한 매핑이 있으면 추가
+    return "";
+  };
+
+  // 예: universityId가 0이면 "KAIST"라고 가정
+  const universityToString = (universityId?: number) => {
+    if (universityId === 1) return "성균관대학교";
+    if (universityId === 2) return "KAIST";
+    if (universityId === 3) return "부산대학교";
+    if (universityId === 4) return "UNIST";
+    if (universityId === 5) return "한양대학교";
+    if (universityId === 6) return "이화여자대학교";
+    if (universityId === 7) return "연세대학교";
+    if (universityId === 8) return "고려대학교";
+    if (universityId === 9) return "DGIST";
+    if (universityId === 10) return "숙명여자대학교";
+    if (universityId === 11) return "서울대학교";
+    if (universityId === 12) return "GIST";
+
+    return "";
+  };
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div
       style={{
@@ -34,7 +167,10 @@ export default function Information() {
           width: "65px",
           height: "65px",
           borderRadius: "100px",
-          background: "url(/images/google_logo.png) lightgray 50% / cover no-repeat",
+          // user.imageUrl 이 존재하면 해당 url로 대체
+          background: `url(${
+            user.imageUrl || "/images/google_logo.png"
+          }) lightgray 50% / cover no-repeat`,
           position: "absolute",
           top: "52px",
           left: "50%",
@@ -63,7 +199,7 @@ export default function Information() {
       >
         Welcome
         <br />
-        Sanggeun Oh
+        {user.name}
       </div>
       {/* Info Box */}
       <div
@@ -96,14 +232,8 @@ export default function Information() {
             letterSpacing: "-0.078px",
           }}
         >
-          {/* First Row */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
+          {/* 성별 */}
+          <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="10"
@@ -128,15 +258,10 @@ export default function Information() {
                 strokeWidth="2"
               />
             </svg>
-            <span style={{ marginLeft: "12px" }}>남성</span>
+            <span style={{ marginLeft: "12px" }}>{sexToKorean(user.sex)}</span>
           </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
+          {/* MBTI */}
+          <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="12"
@@ -181,16 +306,12 @@ export default function Information() {
                 <path d="M-1 -1H23V23H-1V-1Z" fill="black" />
               </g>
             </svg>
-            <span style={{ marginLeft: "12px" }}>ENFP</span>
+            <span style={{ marginLeft: "12px" }}>
+              {mbtiToString(user.mbtiId)}
+            </span>
           </div>
-          {/* Second Row */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
+          {/* 나이 */}
+          <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="13"
@@ -203,15 +324,12 @@ export default function Information() {
                 fill="black"
               />
             </svg>
-            <span style={{ marginLeft: "12px" }}>23살</span>
+            <span style={{ marginLeft: "12px" }}>
+              {user.birthday.split("T")[0]}
+            </span>
           </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
+          {/* 분반 */}
+          <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="12"
@@ -232,16 +350,12 @@ export default function Information() {
                 fill="black"
               />
             </svg>
-            <span style={{ marginLeft: "12px" }}>1분반</span>
+            <span style={{ marginLeft: "12px" }}>
+              {classIdToKorean(user.classId)}
+            </span>
           </div>
-          {/* Third Row */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
+          {/* 학교 (예: KAIST) */}
+          <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="12"
@@ -271,15 +385,12 @@ export default function Information() {
                 strokeLinejoin="round"
               />
             </svg>
-            <span style={{ marginLeft: "12px" }}>KAIST</span>
+            <span style={{ marginLeft: "12px" }}>
+              {universityToString(user.universityId)}
+            </span>
           </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
+          {/* 캠프 상태 */}
+          <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="11"
@@ -292,16 +403,12 @@ export default function Information() {
                 fill="black"
               />
             </svg>
-            <span style={{ marginLeft: "12px" }}>캠프중</span>
+            <span style={{ marginLeft: "12px" }}>
+              {madCampStatusToKorean(user.madCampStatus)}
+            </span>
           </div>
-          {/* Fourth Row */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
+          {/* 전공 분야 (예: 전산학부) */}
+          <div style={{ display: "flex", alignItems: "center" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="11"
@@ -314,7 +421,9 @@ export default function Information() {
                 fill="black"
               />
             </svg>
-            <span style={{ marginLeft: "12px" }}>전산학부</span>
+            <span style={{ marginLeft: "12px" }}>
+              {user.programmingField || "전산학부"}
+            </span>
           </div>
         </div>
       </div>
@@ -334,7 +443,7 @@ export default function Information() {
       >
         Recommended for You
       </div>
-      {/* MeetingCard */}
+      {/* MeetingCard (예시 그대로) */}
       <div
         style={{
           position: "absolute",
