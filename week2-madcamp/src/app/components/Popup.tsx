@@ -2,7 +2,10 @@ import React, { useState } from "react";
 
 interface PopupProps {
   isOpen: boolean;
+
   onClose: () => void;
+
+  children?: React.ReactNode;
 }
 
 const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
@@ -17,7 +20,11 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
     endTime: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -61,7 +68,9 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
         <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
           {/* 카테고리 선택 */}
           <div>
-            <label className="block text-xl font-semibold text-gray-800 mb-2">카테고리</label>
+            <label className="block text-xl font-semibold text-gray-800 mb-2">
+              카테고리
+            </label>
             <select
               name="category"
               value={formData.category}
@@ -77,7 +86,9 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
           </div>
 
           <div>
-            <label className="block text-xl font-semibold text-gray-800 mb-2">제목</label>
+            <label className="block text-xl font-semibold text-gray-800 mb-2">
+              제목
+            </label>
             <input
               type="text"
               name="title"
@@ -89,7 +100,9 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
           </div>
 
           <div>
-            <label className="block text-xl font-semibold text-gray-800 mb-2">키워드</label>
+            <label className="block text-xl font-semibold text-gray-800 mb-2">
+              키워드
+            </label>
             <input
               type="text"
               name="keyword"
@@ -101,7 +114,9 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
           </div>
 
           <div>
-            <label className="block text-xl font-semibold text-gray-800 mb-2">간단한 설명</label>
+            <label className="block text-xl font-semibold text-gray-800 mb-2">
+              간단한 설명
+            </label>
             <textarea
               name="description"
               placeholder="간단한 설명을 입력하세요"
@@ -113,7 +128,9 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
           </div>
 
           <div>
-            <label className="block text-xl font-semibold text-gray-800 mb-2">장소</label>
+            <label className="block text-xl font-semibold text-gray-800 mb-2">
+              장소
+            </label>
             <input
               type="text"
               name="location"
@@ -125,7 +142,9 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
           </div>
 
           <div>
-            <label className="block text-xl font-semibold text-gray-800 mb-2">최대 인원</label>
+            <label className="block text-xl font-semibold text-gray-800 mb-2">
+              최대 인원
+            </label>
             <input
               type="number"
               name="maxPeople"
@@ -138,7 +157,9 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="block text-xl font-semibold text-gray-800 mb-2">출발 시간</label>
+              <label className="block text-xl font-semibold text-gray-800 mb-2">
+                출발 시간
+              </label>
               <input
                 type="time"
                 name="startTime"
@@ -148,7 +169,9 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
               />
             </div>
             <div>
-              <label className="block text-xl font-semibold text-gray-800 mb-2">종료 시간</label>
+              <label className="block text-xl font-semibold text-gray-800 mb-2">
+                종료 시간
+              </label>
               <input
                 type="time"
                 name="endTime"

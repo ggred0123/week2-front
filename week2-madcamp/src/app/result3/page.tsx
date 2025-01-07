@@ -2,10 +2,11 @@
 import React from "react";
 import Header from "../components/Header";
 import BottomNav2 from "../components/BottomNav2";
+import Image from "next/image";
 
 export default function MatchingSuccess3() {
   // 스타일 정의
-  const styles : { [key: string]: React.CSSProperties } = {
+  const styles: { [key: string]: React.CSSProperties } = {
     container: {
       minHeight: "100vh",
       backgroundColor: "white",
@@ -30,7 +31,7 @@ export default function MatchingSuccess3() {
       justifyContent: "center",
       alignItems: "center",
       borderRadius: "20px",
-      marginTop:"-150px",
+      marginTop: "-150px",
     },
     successImage: {
       width: "350px",
@@ -53,7 +54,7 @@ export default function MatchingSuccess3() {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      marginTop:"115px",
+      marginTop: "115px",
       gap: "16px",
     },
     profileImage: {
@@ -61,7 +62,7 @@ export default function MatchingSuccess3() {
       height: "300px",
       borderRadius: "20px",
       border: "4px solid #FFF",
-      marginTop:"30px",
+      marginTop: "30px",
       boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
     },
     profileName: {
@@ -73,7 +74,7 @@ export default function MatchingSuccess3() {
     profileDescription: {
       fontSize: "23px",
       fontWeight: "normal",
-      fontFamily:"Heebo",
+      fontFamily: "Heebo",
       color: "#555",
       textAlign: "center",
     },
@@ -86,10 +87,17 @@ export default function MatchingSuccess3() {
       {/* 콘텐츠 영역 */}
       <main style={styles.main}>
         {/* 매칭 성공 이미지와 텍스트 */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "1rem",
+          }}
+        >
           {/* 성공 이미지 */}
           <div style={styles.successImageContainer}>
-            <img
+            <Image
               src="/images/success_icon.png" // 성공 이미지를 여기에 추가
               alt="매칭 성공"
               style={styles.successImage}
@@ -102,7 +110,7 @@ export default function MatchingSuccess3() {
         {/* 프로필 카드 */}
         <div style={styles.profileCard}>
           {/* 프로필 이미지 */}
-          <img
+          <Image
             src="/images/face_genius.jpg" // 사용자 프로필 이미지를 여기에 추가
             alt="프로필"
             style={styles.profileImage}

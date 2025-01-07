@@ -3,6 +3,13 @@
 import * as React from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { Aclonica } from "next/font/google";
+
+const aclonica = Aclonica({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 const MemorialServiceLanding: React.FC = () => {
   const router = useRouter();
@@ -42,21 +49,18 @@ const MemorialServiceLanding: React.FC = () => {
         {/* Top section with image and title */}
         <div className="flex flex-col items-center">
           <div className="w-full" style={{ height: "850px" }}>
-            <img
+            <Image
               src="/workspace.svg"
               alt="Workspace illustration"
+              width={709}
+              height={850}
               className="w-full h-full object-cover"
             />
           </div>
 
-          <style>
-            @import
-            url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
-          </style>
           <h1
-            className="text-center mb-3 mt-12"
+            className={`text-center mb-3 mt-12 ${aclonica.className}`}
             style={{
-              fontFamily: "Aclonica",
               fontSize: "48px",
               fontWeight: 400,
               lineHeight: "48px",
@@ -87,10 +91,12 @@ const MemorialServiceLanding: React.FC = () => {
             onClick={handleGoogleLogin}
             className="w-full bg-transparent text-3xl scale-110 rounded-lg py-4 font-semibold hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-white"
           >
-            <img
-              src="https://www.svgrepo.com/show/475656/google-color.svg"
+            <Image
+              src="/images/google_logo.png"
               alt="Google Logo"
-              className="w-6 h-6"
+              width={30}
+              height={30}
+              className="w-10 h-10"
             />
             Continue with Google
           </button>

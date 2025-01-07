@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 // 이미 작성된 이미지 업로더 컴포넌트라고 가정
 import UploadExample from "@/components/UploadExample";
@@ -47,9 +48,7 @@ interface CompleteProfileData {
  */
 export default function CompleteProfilePage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  const accessToken = searchParams.get("accessToken");
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     console.log("Token from localStorage:", token);
@@ -669,7 +668,7 @@ export default function CompleteProfilePage() {
                 >
                   이미지 미리보기:
                 </p>
-                <img
+                <Image
                   src={formData.imageUrl}
                   alt="프로필 이미지"
                   style={{

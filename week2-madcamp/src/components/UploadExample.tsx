@@ -1,5 +1,6 @@
 // UploadExample.tsx
 import React, { useState } from "react";
+import Image from "next/image";
 
 interface UploadExampleProps {
   onUpload: (url: string) => void;
@@ -111,7 +112,7 @@ function UploadExample({ onUpload }: UploadExampleProps) {
       {imageUrl && (
         <div className="mt-4">
           <p className="text-sm text-gray-700 mb-2">업로드된 이미지:</p>
-          <img
+          <Image
             src={imageUrl}
             alt="Uploaded Preview"
             className="w-32 h-32 object-cover rounded-lg"
