@@ -11,14 +11,6 @@ export default function Wait1() {
 
   useEffect(() => {
     const checkMatchStatus = async () => {
-      // localStorage에서 현재 로그인한 사용자 ID 가져오기
-      const currentUserId = localStorage.getItem("userId");
-
-      if (!currentUserId) {
-        console.error("User not logged in");
-        return;
-      }
-
       try {
         // URL에 직접 쿼리 파라미터 추가
         const url = new URL(
@@ -30,7 +22,7 @@ export default function Wait1() {
         const response = await fetch(url, {
           method: "GET",
           headers: {
-            "x-user-id": currentUserId,
+            "x-user-id": "20",
           },
         });
 
@@ -59,7 +51,8 @@ export default function Wait1() {
         transformOrigin: "top left", // 스케일 기준점 설정
         width: "709px", // 스케일로 인해 잘리는 부분 방지
         height: "1463px", // 높이 비율 조정
-        overflow: "hidden",  position: "fixed",// 넘치는 부분 숨김
+        overflow: "hidden",
+        position: "fixed", // 넘치는 부분 숨김
       }}
     >
       <Header title="Matching System" />

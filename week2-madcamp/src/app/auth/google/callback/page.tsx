@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
@@ -10,22 +9,35 @@ const GoogleCallbackPage = () => {
     console.log("=== Google Callback Started ===");
 
     const params = new URLSearchParams(window.location.search);
-    console.log("Auth Token:", params.get("accessToken"));
-    console.log("Is New User:", params.get("isNewUser"));
+    const userId = params.get("userId");
+
+    // 디버깅을 위한 로그 추가
+    console.log("URL Parameters:", {
+      userId: params.get("userId"),
+      accessToken: params.get("accessToken"),
+      isNewUser: params.get("isNewUser"),
+    });
 
     const encodedToken = params.get("accessToken");
-    if (encodedToken) {
+
+    if (encodedToken && userId) {
       const accessToken = decodeURIComponent(encodedToken);
       localStorage.setItem("accessToken", accessToken);
-      const isNewUser = params.get("isNewUser");
+      localStorage.setItem("userId", userId);
 
-      console.log(
-        "Navigation Target:",
-        isNewUser === "true" ? "/signup" : "/meeting_list"
-      );
+      // 저장 직후 확인을 위한 로그
+      console.log("Stored in localStorage:", {
+        userId: localStorage.getItem("userId"),
+        accessToken: localStorage.getItem("accessToken"),
+      });
+
+      const isNewUser = params.get("isNewUser");
       router.push(isNewUser === "true" ? "/signup" : "/meeting_list");
     } else {
-      console.error("No token found in URL");
+      console.error("Missing required parameters:", {
+        hasToken: !!encodedToken,
+        hasUserId: !!userId,
+      });
     }
   }, [router]);
 

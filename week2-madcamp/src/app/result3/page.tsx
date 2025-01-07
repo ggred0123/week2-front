@@ -1,11 +1,39 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import BottomNav2 from "../components/BottomNav2";
 import Image from "next/image";
 
-export default function MatchingSuccess3() {
-  // 스타일 정의
+interface MatchData {
+  status: string;
+  data: [
+    {
+      user: {
+        id: number;
+        name: string;
+        major: string;
+        image_url: string;
+        // ... 필요한 다른 필드들
+      };
+      score: number;
+      reasoning: string;
+      recommendation: string;
+    }
+  ];
+}
+
+export default function MatchingSuccess1() {
+  const [matchData, setMatchData] = useState<MatchData | null>(null);
+
+  useEffect(() => {
+    // localStorage에서 매치 데이터 가져오기
+    const storedMatchData = localStorage.getItem("matchData");
+    if (storedMatchData) {
+      setMatchData(JSON.parse(storedMatchData));
+    }
+  }, []);
+
+  // 스타일 정의는 동일하게 유지
   const styles: { [key: string]: React.CSSProperties } = {
     container: {
       minHeight: "100vh",
@@ -13,6 +41,11 @@ export default function MatchingSuccess3() {
       display: "flex",
       flexDirection: "column",
       position: "relative",
+      transform: "scale(0.406)", // 288 / 709
+      transformOrigin: "top left", // 스케일 기준점 설정
+      width: "709px", // 스케일로 인해 잘리는 부분 방지
+      height: "1463px", // 높이 비율 조정
+      overflow: "hidden",
     },
     main: {
       flexGrow: 1,
@@ -47,14 +80,14 @@ export default function MatchingSuccess3() {
     profileCard: {
       width: "90%",
       maxWidth: "500px",
-      height: "500px",
+      height: "700px",
       background: "#FCEBF8",
       borderRadius: "15px",
       boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      marginTop: "115px",
+      marginTop: "10px",
       gap: "16px",
     },
     profileImage: {
@@ -79,14 +112,14 @@ export default function MatchingSuccess3() {
       textAlign: "center",
     },
   };
+  const matchedUser = matchData?.data[0]?.user;
+  const matchDetails = matchData?.data[0];
 
   return (
     <div style={styles.container}>
       <Header title="Matching System" />
 
-      {/* 콘텐츠 영역 */}
       <main style={styles.main}>
-        {/* 매칭 성공 이미지와 텍스트 */}
         <div
           style={{
             display: "flex",
@@ -95,38 +128,43 @@ export default function MatchingSuccess3() {
             gap: "1rem",
           }}
         >
-          {/* 성공 이미지 */}
           <div style={styles.successImageContainer}>
             <Image
-              src="/images/success_icon.png" // 성공 이미지를 여기에 추가
+              src="/images/success_icon.png"
               alt="매칭 성공"
+              width={350} // 이미지 너비
+              height={350}
               style={styles.successImage}
             />
           </div>
-          {/* 성공 메시지 */}
           <p style={styles.successText}>Teammate 매칭 성공</p>
         </div>
 
-        {/* 프로필 카드 */}
         <div style={styles.profileCard}>
           {/* 프로필 이미지 */}
-          <Image
-            src="/images/face_genius.jpg" // 사용자 프로필 이미지를 여기에 추가
-            alt="프로필"
-            style={styles.profileImage}
-          />
-          {/* 이름 */}
-          <h3 style={styles.profileName}>김영민</h3>
-          {/* 설명 */}
+          {matchedUser?.image_url && (
+            <Image
+              src={matchedUser.image_url}
+              alt="프로필"
+              width={300} // 이미지 너비
+              height={300}
+              style={styles.profileImage}
+            />
+          )}
+          {/* 프로필 이름과 설명 */}
+          <h3 style={styles.profileName}>
+            {matchedUser?.name || "매칭된 팀메이트"}
+          </h3>
           <p style={styles.profileDescription}>
-            신실한 열정의 매트를 가지자!!!
+            {matchedUser?.major && `${matchedUser.major} `}
             <br />
-            멋진 팀으로 좋은 시너지가 만들어질 것 같아요.
+            {matchDetails?.reasoning}
+            <br />
+            {matchDetails?.recommendation}
           </p>
         </div>
       </main>
 
-      {/* 하단 네비게이션 */}
       <BottomNav2 />
     </div>
   );
