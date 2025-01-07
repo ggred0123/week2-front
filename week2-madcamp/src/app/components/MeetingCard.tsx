@@ -2,45 +2,55 @@ import React from "react";
 
 interface MeetingCardProps {
   image: string; // Image URL
-  title: string; // Main text, e.g., "아이스크림 먹으러가실 분?"
-  subtitle: string; // Secondary text, e.g., "Ice Cream"
+  title: string; // Main text
   icon: React.ReactNode; // SVG icon
-  location: string; // Location text, e.g., "신세계 백화점 B1"
-  participants: string; // Participant text, e.g., "4/10명"
+  location: string; // Location text
+  participants: string; // Participant text
+  keyword?: string; // Text color and background color for the tag
+  subtitleColor?: string; // Text color for keyword
+  subtitleBgColor?: string; // Background color for keyword
+  startTime: string; // Start time of the meeting
+  endTime: string; // End time of the meeting
 }
 
 const MeetingCard: React.FC<MeetingCardProps> = ({
   image,
   title,
-  subtitle,
   icon,
   location,
   participants,
+  keyword,
+  subtitleColor,
+  subtitleBgColor,
+  startTime,
+  endTime,
 }) => {
   return (
     <div
       style={{
-        width: "244px",
-        height: "81px",
+        width: "600px",
+        height: "220px",
         flexShrink: 0,
         borderRadius: "7px",
         background: "var(--White, #FFF)",
         boxShadow: "0px 12px 24px 0px rgba(68, 68, 68, 0.10)",
         display: "flex",
         alignItems: "center",
-        padding: "10px",
-        marginLeft: "14px",
+        padding: "20px",
+        marginLeft: "auto",
+        marginRight: "auto",
+        marginBottom: "20px",
+        marginTop: "20px",
       }}
     >
       {/* Image Section */}
       <div
         style={{
-          width: "51px",
-          height: "51px",
+          width: "150px",
+          height: "150px",
           flexShrink: 0,
           borderRadius: "12px",
-          background: `url(${image}) lightgray 0px -0.307px / 100% 158.248% no-repeat`,
-          marginLeft: "6px",
+          background: `url(${image}) lightgray center center / cover no-repeat`,
         }}
       ></div>
 
@@ -54,99 +64,102 @@ const MeetingCard: React.FC<MeetingCardProps> = ({
           justifyContent: "space-between",
         }}
       >
-        {/* Title and Subtitle */}
+        {/* Title and Keyword */}
         <div>
           <div
             style={{
               color: "var(--Black, #333)",
               fontFamily: "Heebo",
-              fontSize: "10px",
-              fontStyle: "normal",
+              fontSize: "21px",
               fontWeight: 700,
-              lineHeight: "normal",
-              padding: "5px",
+              marginBottom: "8px",
             }}
           >
             {title}
           </div>
-          <div
-            style={{
-              display: "inline-flex",
-              padding: "2px 8px",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "10px",
-              borderRadius: "100px",
-              background: "rgba(45, 156, 219, 0.10)",
-              color: "var(--Blue-2, #2D9CDB)",
-              fontFamily: "Avenir",
-              fontSize: "8px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "normal",
-              marginLeft: "0px",
-            }}
-          >
-            {subtitle}
-          </div>
+          {keyword && (
+            <div
+              style={{
+                display: "inline-flex",
+                padding: "4px 12px",
+                borderRadius: "50px",
+                background: subtitleBgColor,
+                color: subtitleColor,
+                fontFamily: "Avenir",
+                fontSize: "14px",
+                fontWeight: 400,
+                lineHeight: "normal",
+                marginTop: "4px",
+              }}
+            >
+              {keyword}
+            </div>
+          )}
         </div>
 
-        {/* Location and Participants */}
+        {/* Location, Participants, and Time */}
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            marginTop: "12px",
           }}
         >
           <div
             style={{
               display: "flex",
-              alignItems: "center",
+              flexDirection: "column",
+              justifyContent: "space-between",
             }}
           >
-            {/* Icon */}
             <div
               style={{
-                width: "8px",
-                height: "8px",
-                flexShrink: 0,
-                marginRight: "5px",
-                marginLeft: "5px",
-                padding: "3px",
+                display: "flex",
+                alignItems: "center",
               }}
             >
-              {icon}
+              <div
+                style={{
+                  width: "16px",
+                  height: "16px",
+                  marginRight: "8px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {icon}
+              </div>
+              <div
+                style={{
+                  color: "var(--Grey, #1C1B1B)",
+                  fontFamily: "ABeeZee",
+                  fontSize: "18px",
+                  fontWeight: 400,
+                }}
+              >
+                {location}
+              </div>
             </div>
-
-            {/* Location */}
             <div
               style={{
-                color: "var(--Grey, #747474)",
+                color: "var(--Black, #333)",
                 fontFamily: "ABeeZee",
-                fontSize: "8px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "normal",
-                marginLeft: "6px",
-                marginTop: "16px",
+                fontSize: "15px",
+                marginTop: "4px",
               }}
             >
-              {location}
+              {startTime} - {endTime}
             </div>
           </div>
-
-          {/* Participants */}
           <div
             style={{
               color: "var(--Black, #333)",
               textAlign: "right",
               fontFamily: "Heebo",
-              fontSize: "7px",
-              fontStyle: "normal",
+              fontSize: "17px",
               fontWeight: 700,
-              lineHeight: "normal",
-              marginLeft: "5px",
             }}
           >
             {participants}
