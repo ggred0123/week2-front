@@ -37,7 +37,7 @@ export default function Recommendation() {
         {/* 텍스트 박스 */}
         <div
           style={{
-            width: "550px",
+            width: "500px",
             height: "200px",
             padding: "20px",
             borderRadius: "10px",
