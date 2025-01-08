@@ -80,7 +80,7 @@ export default function Recommendation() {
           style={{
             width: "100%",
             height: "500px",
-            maxWidth: "513px",
+            maxWidth: "600px",
             background:
               "linear-gradient(135deg, #1FF7FD -57.3%, #B33BF6 51.62%, #FF844C 101.62%, #FF844B 130.58%)",
             borderRadius: "15px",
@@ -106,9 +106,9 @@ export default function Recommendation() {
           <Link href="/wait1">
             <button
               style={{
-                width: "400px", // 버튼 폭
+                width: "450px", // 버튼 폭
                 height: "60px", // 버튼 높이
-                fontSize: "28px", // 버튼 글씨 크기
+                fontSize: "30px", // 버튼 글씨 크기
                 fontWeight: "bold",
                 marginBottom: "50px",
               }}
@@ -120,9 +120,9 @@ export default function Recommendation() {
           <Link href="/wait2">
             <button
               style={{
-                width: "400px", // 버튼 폭
+                width: "450px", // 버튼 폭
                 height: "60px", // 버튼 높이
-                fontSize: "28px", // 버튼 글씨 크기
+                fontSize: "30px", // 버튼 글씨 크기
                 fontWeight: "bold",
                 marginBottom: "50px",
               }}
@@ -134,9 +134,9 @@ export default function Recommendation() {
           <Link href="/wait3">
             <button
               style={{
-                width: "400px", // 버튼 폭
+                width: "450px", // 버튼 폭
                 height: "60px", // 버튼 높이
-                fontSize: "28px", // 버튼 글씨 크기
+                fontSize: "30px", // 버튼 글씨 크기
                 fontWeight: "bold",
               }}
               className="bg-green-100 text-green-700 rounded-lg"
