@@ -4,23 +4,22 @@ export default function BottomNav2() {
   return (
     <div
       style={{
-        transform: "scale(0.83,0.83)", 
-        width: "620px",
-        height: "130px",
+        width: "500px",
+        height: "100px",
         flexShrink: 0,
-        borderRadius: "36px",
+        borderRadius: "100px",
         background: "var(--White, #FFF)",
         boxShadow: "0px 0px 32px 0px rgba(0, 0, 0, 0.10)",
-        left:"40px"
+        bottom: "50px",
       }}
-      className="fixed bottom-10 left-12 transform -translate-x-1/2 flex justify-around items-center"
+      className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex justify-around items-center"
     >
       {/* Icon 1 */}
       <Link href="/meeting_list">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="45"
-          height="45"
+          width="55"
+          height="100"
           viewBox="0 0 24 24"
           fill="none"
         >
@@ -30,72 +29,59 @@ export default function BottomNav2() {
           />
         </svg>
       </Link>
-        
-      
 
-      {/* Icon 2 */}
       <Link href="/recommendation">
-          <svg
+        <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="45"
-          height="45"
+          width="50"
+          height="90"
           viewBox="0 0 24 24"
           fill="none"
         >
           <path
             d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z"
-            stroke="#A53FDE"
+            stroke="#B33BF6"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
             d="M14 2V8H20"
-            stroke="#A53FDE"
+            stroke="#B33BF6"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
-            d="M16 13H8" 
-            stroke="#A53FDE"
+            d="M16 13H8"
+            stroke="#B33BF6"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
             d="M16 17H8"
-            stroke="#A53FDE"
+            stroke="#B33BF6"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
             d="M10 9H9H8"
-            stroke="#A53FDE"
+            stroke="#B33BF6"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="31"
-              height="60"
-              viewBox="0 0 31 60"
-              fill="none"
-            >
-              <path d="M0.5 3H30.5" stroke="#B33BF6" strokeWidth="2" transform="translate(0, 20)"/>
-          </svg>
-      </svg>
-    </Link>
+        </svg>
+      </Link>
 
-      
       {/* Icon 4 */}
       <Link href="/information">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="48"
-          height="48"
+          width="50"
+          height="96"
           viewBox="0 0 24 24"
           fill="none"
         >
@@ -113,6 +99,20 @@ export default function BottomNav2() {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="31"
+            height="60"
+            viewBox="0 0 31 60"
+            fill="none"
+          >
+            <path
+              d="M0.5 3H30.5"
+              stroke="#747474"
+              strokeWidth="2"
+              transform="translate(0, 20)"
+            />
+          </svg>
         </svg>
       </Link>
     </div>

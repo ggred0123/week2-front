@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import MeetingCard from "../components/MeetingCard";
 import BottomNav2 from "../components/BottomNav4";
 
 interface UserDto {
@@ -443,7 +442,7 @@ export default function Information() {
       >
         profile
       </div>
-      
+
       <BottomNav2 />
     </div>
   );

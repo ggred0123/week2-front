@@ -175,16 +175,17 @@ export default function MeetingListPage() {
   );
 
   return (
-    <div className="h-[844px] w-[390px] bg-white flex flex-col relative overflow-hidden"
-    style={{
-      transform: "scale(0.55,0.4427)", // 288 / 709
-      transformOrigin: "top left", // 스케일 기준점 설정
-      width: "709px", // 스케일로 인해 잘리는 부분 방지
-      height: "1463px", // 높이 비율 조정
-      overflow: "hidden",
-      position: "fixed", // 넘치는 부분 숨김
-    }}
-  >
+    <div
+      className="h-[844px] w-[390px] bg-white flex flex-col relative overflow-hidden"
+      style={{
+        transform: "scale(0.55,0.4427)", // 288 / 709
+        transformOrigin: "top left", // 스케일 기준점 설정
+        width: "709px", // 스케일로 인해 잘리는 부분 방지
+        height: "1463px", // 높이 비율 조정
+        overflow: "hidden",
+        position: "fixed", // 넘치는 부분 숨김
+      }}
+    >
       <Header title="Meeting list" />
 
       <div className="flex-1 flex flex-col overflow-hidden">
@@ -235,8 +236,8 @@ export default function MeetingListPage() {
           width: "104px", // 버튼 너비 (기존보다 크거나 작게 설정)
           height: "104px", // 버튼 높이
           fontSize: "44px", // 버튼 내부 아이콘 크기 조정
-          right:"30px",
-          bottom:"140px",
+          right: "30px",
+          bottom: "140px",
         }}
         onClick={() => setIsPopupOpen(true)}
       >
@@ -255,10 +256,7 @@ export default function MeetingListPage() {
         </svg>
       </button>
 
-      {/* 하단 네비게이션 */}
-      <div className="fixed bottom-0 left-0 right-0 h-16">
-        <BottomNav1 />
-      </div>
+      <BottomNav1 />
 
       {/* 팝업 예시 */}
       <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
