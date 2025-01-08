@@ -8,15 +8,16 @@ interface CategoryButtonsProps {
 export default function CategoryButtons({ onCategoryChange }: CategoryButtonsProps) {
   return (
     <div
-      className="grid grid-cols-2 gap-x-6 gap-y-6 relative"
+      className="grid grid-cols-2 relative"
       style={{
-        left: '10px',
+        left: '30px',
         padding:'10px',
+        gap: '20px 0px',
       }}
     >
       {/* Meet new friends 버튼 */}
       <button
-        className="relative flex items-center justify-center w-[280px] h-[110px] rounded-[30px]"
+        className="relative flex items-center justify-center w-[260px] h-[110px] rounded-[30px]"
         style={{
           background: "#FA5D5D",
         }}
@@ -68,7 +69,7 @@ export default function CategoryButtons({ onCategoryChange }: CategoryButtonsPro
 
       {/* Exercise 버튼 */}
       <button
-        className="relative flex items-center justify-center w-[280px] h-[110px] rounded-[30px]"
+        className="relative flex items-center justify-center w-[260px] h-[110px] rounded-[30px]"
         style={{
           background: "#54A5DA",
         }}
@@ -118,7 +119,7 @@ export default function CategoryButtons({ onCategoryChange }: CategoryButtonsPro
       </button>
 
       <button
-        className="relative flex items-center justify-center w-[280px] h-[110px] rounded-[30px]"
+        className="relative flex items-center justify-center w-[260px] h-[110px] rounded-[30px]"
         style={{
           background: "#D199F0",
         }}
@@ -174,7 +175,7 @@ export default function CategoryButtons({ onCategoryChange }: CategoryButtonsPro
         </div>
       </button>
       <button
-        className="relative flex items-center justify-center w-[280px] h-[110px] rounded-[30px]"
+        className="relative flex items-center justify-center w-[260px] h-[110px] rounded-[30px]"
         style={{
           background: "#ABDB43",
         }}
