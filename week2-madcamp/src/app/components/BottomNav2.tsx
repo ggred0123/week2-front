@@ -4,7 +4,7 @@ export default function BottomNav2() {
   return (
     <div
       style={{
-        transform: "scale(0.83,0.83)", 
+        transform: "scale(0.73,0.83)", 
         width: "620px",
         height: "130px",
         flexShrink: 0,
