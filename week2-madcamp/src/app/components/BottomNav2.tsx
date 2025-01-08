@@ -4,14 +4,16 @@ export default function BottomNav2() {
   return (
     <div
       style={{
-        width: "650px",
+        transform: "scale(0.83,0.83)", 
+        width: "620px",
         height: "130px",
         flexShrink: 0,
         borderRadius: "36px",
         background: "var(--White, #FFF)",
         boxShadow: "0px 0px 32px 0px rgba(0, 0, 0, 0.10)",
+        left:"40px"
       }}
-      className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex justify-around items-center"
+      className="fixed bottom-10 left-12 transform -translate-x-1/2 flex justify-around items-center"
     >
       {/* Icon 1 */}
       <Link href="/meeting_list">

@@ -140,8 +140,8 @@ export default function Information() {
       style={{
         position: "relative",
         background: "#FEFEFE",
-        width: "390px",
-        height: "844px",
+        width: "380px",
+        height: "666px",
         overflow: "hidden",
       }}
     >
@@ -430,58 +430,20 @@ export default function Information() {
       {/* Recommended Section */}
       <div
         style={{
-          width: "104px",
+          width: "304px",
           textAlign: "center",
           fontFamily: '"Product Sans", sans-serif',
           fontSize: "14px",
           color: "#181D2D",
           position: "absolute",
-          top: "514px",
+          top: "534px",
           left: "10%",
           zIndex: 2,
         }}
       >
-        Recommended for You
+        profile
       </div>
-      {/* MeetingCard (예시 그대로) */}
-      <div
-        style={{
-          position: "absolute",
-          top: "537px",
-          left: "47%",
-          transform: "translateX(-50%)",
-          zIndex: 2,
-        }}
-      >
-        <MeetingCard
-          image="/images/sung_image.jpg"
-          title="1월 24일 딸기시루팥"
-          description="Sweet Cakes"
-          location="성심당 케이부띠끄"
-          participants="8/10명"
-          keyword="케이크"
-          startTime="14:00"
-          endTime="16:00"
-          icon={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="11"
-              height="11"
-              viewBox="0 0 12 12"
-              fill="none"
-            >
-              <path
-                d="M10.5 5C10.5 8.5 6 11.5 6 11.5C6 11.5 1.5 8.5 1.5 5C1.5 3.80653 1.97411 2.66193 2.81802 1.81802C3.66193 0.974106 4.80653 0.5 6 0.5C7.19347 0.5 8.33807 0.974106 9.18198 1.81802C10.0259 2.66193 10.5 3.80653 10.5 5Z"
-                fill="#FA5D5D"
-              />
-              <path
-                d="M6 6.5C6.82843 6.5 7.5 5.82843 7.5 5C7.5 4.17157 6.82843 3.5 6 3.5C5.17157 3.5 4.5 4.17157 4.5 5C4.5 5.82843 5.17157 6.5 6 6.5Z"
-                fill="white"
-              />
-            </svg>
-          }
-        />
-      </div>
+      
       <BottomNav2 />
     </div>
   );

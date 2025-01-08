@@ -36,17 +36,17 @@ export default function MatchingSuccess1() {
   // 스타일 정의는 동일하게 유지
   const styles: { [key: string]: React.CSSProperties } = {
     container: {
-      minHeight: "100vh",
-      backgroundColor: "white",
-      display: "flex",
-      flexDirection: "column",
-      position: "relative",
-      transform: "scale(0.406)", // 288 / 709
-      transformOrigin: "top left", // 스케일 기준점 설정
-      width: "709px", // 스케일로 인해 잘리는 부분 방지
-      height: "1463px", // 높이 비율 조정
-      overflow: "hidden",
-    },
+        minHeight: "100vh",
+        backgroundColor: "white",
+        display: "flex",
+        flexDirection: "column",
+        position: "relative",
+        transform: "scale(0.55,0.4427)", // 288 / 709
+        transformOrigin: "top left", // 스케일 기준점 설정
+        width: "709px", // 스케일로 인해 잘리는 부분 방지
+        height: "1463px", // 높이 비율 조정
+        overflow: "hidden",
+      },
     main: {
       flexGrow: 1,
       display: "flex",
