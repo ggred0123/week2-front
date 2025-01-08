@@ -99,10 +99,10 @@ export default function MeetingListPage() {
       string,
       { id: number; icon: "meet" | "exercise" | "drink" | "study" }
     > = {
-      "Meet new friends": { id: 0, icon: "meet" },
-      Exercise: { id: 1, icon: "exercise" },
-      Drink: { id: 2, icon: "drink" },
-      Study: { id: 3, icon: "study" },
+      "Meet new friends": { id: 1, icon: "meet" },
+      Exercise: { id: 2, icon: "exercise" },
+      Drink: { id: 3, icon: "drink" },
+      Study: { id: 4, icon: "study" },
     };
     // 맵에 없는 경우(전체 등)에는 -1로 처리
     const categoryInfo = iconMap[text] || { id: 1, icon: "meet" };
