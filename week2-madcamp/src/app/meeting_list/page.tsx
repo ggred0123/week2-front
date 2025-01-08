@@ -61,10 +61,10 @@ export default function MeetingListPage() {
 
   // categoryStyles: 각 카테고리에 맞는 스타일(텍스트/배경색)
   const categoryStyles: Record<number, CategoryStyle> = {
-    0: { text: "#FA5D5D", bg: "rgba(250, 93, 93, 0.10)" },
-    1: { text: "#2D9CDB", bg: "rgba(45, 156, 219, 0.10)" },
-    2: { text: "#9B51E0", bg: "rgba(155, 81, 224, 0.10)" },
-    3: { text: "#27AE60", bg: "rgba(39, 174, 96, 0.10)" },
+    1: { text: "#FA5D5D", bg: "rgba(250, 93, 93, 0.10)" },
+    2: { text: "#2D9CDB", bg: "rgba(45, 156, 219, 0.10)" },
+    3: { text: "#9B51E0", bg: "rgba(155, 81, 224, 0.10)" },
+    4: { text: "#27AE60", bg: "rgba(39, 174, 96, 0.10)" },
   };
 
   // 서버에서 받아온 CardData를 필요한 형태로 가공하는 함수
