@@ -5,13 +5,14 @@ interface CardPopupProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
-  keyword: string; // 카테고리 이름
+  keyword: string;
   description: string;
   image: string;
   location: string;
   participants: string;
   startTime: string;
   endTime: string;
+  meetingId: number;
 }
 
 const CardPopup: React.FC<CardPopupProps> = ({
@@ -25,20 +26,57 @@ const CardPopup: React.FC<CardPopupProps> = ({
   participants,
   startTime,
   endTime,
+  meetingId,
 }) => {
   if (!isOpen) return null;
 
+  const handleJoin = async () => {
+    try {
+      // localStorage에서 accessToken 가져오기
+      const accessToken = localStorage.getItem("accessToken");
+      console.log("CardPopup - Current accessToken:", accessToken);
+
+      if (!accessToken) {
+        alert("로그인이 필요합니다.");
+        return;
+      }
+
+      const response = await fetch(
+        `https://everymadcamp-service-320281252015.asia-northeast3.run.app/meetings/${meetingId}/join`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`, // 토큰 추가
+          },
+        }
+      );
+
+      if (response.ok) {
+        alert("참여가 완료되었습니다!");
+      } else if (response.status === 401) {
+        alert("인증이 만료되었습니다. 다시 로그인해주세요.");
+        // 필요한 경우 로그인 페이지로 리다이렉트
+      } else {
+        alert("참여 중 오류가 발생했습니다.");
+      }
+    } catch (error) {
+      console.error("Error joining meeting:", error);
+      alert("참여 요청 중 문제가 발생했습니다.");
+    }
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      {/* 나머지 JSX 코드는 동일 */}
       <div className="bg-white rounded-xl p-6 w-[90%] max-w-lg shadow-lg relative">
-        {/* 이미지 섹션 */}
         <div
           className="flex justify-center items-center w-80 h-80 rounded-lg overflow-hidden mb-8"
           style={{
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // 그림자 추가
-            position: "relative", // 위치 조정을 위한 `relative` 설정
-            left: "70px", // 컨테이너를 오른쪽으로 이동
-            top: "10px", // 컨테이너를 아래로 이동
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            position: "relative",
+            left: "70px",
+            top: "10px",
           }}
         >
           <img
@@ -46,24 +84,25 @@ const CardPopup: React.FC<CardPopupProps> = ({
             alt={title}
             className="w-full h-full object-cover"
             style={{
-              borderRadius: "12px", // 사진 모서리 둥글게
-              transform: "scale(1.02)", // 약간 확대된 느낌
+              borderRadius: "12px",
+              transform: "scale(1.02)",
               transformOrigin: "top right",
-              transition: "transform 0.3s", // 부드러운 효과
+              transition: "transform 0.3s",
             }}
           />
         </div>
 
-        {/* 제목 및 카테고리 */}
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold text-black mb-2">{title}</h2>
-          <p className="text-base text-gray-600 mb-8 leading-relaxed">{keyword}</p>
+          <p className="text-base text-gray-600 mb-8 leading-relaxed">
+            {keyword}
+          </p>
         </div>
 
-        {/* 설명 섹션 */}
-        <p className="text-base text-gray-600 mb-10 leading-relaxed">{description}</p>
+        <p className="text-base text-gray-600 mb-10 leading-relaxed">
+          {description}
+        </p>
 
-        {/* 상세 정보 */}
         <div className="mb-12 space-y-7">
           <p className="text-lg text-gray-600 flex items-center">
             <svg
@@ -89,26 +128,28 @@ const CardPopup: React.FC<CardPopupProps> = ({
           </p>
         </div>
 
-        {/* 버튼 섹션 */}
         <div className="flex justify-between mt-6">
           <button
             className="w-[40%] py-3 rounded-lg hover:opacity-90 transition"
             style={{
-              background: "rgba(255, 199, 199, 0.56)", // 닫기 버튼 배경색
-              color: "black", // 텍스트 색상
+              background: "rgba(255, 199, 199, 0.56)",
+              color: "black",
               borderRadius: "20px",
             }}
             onClick={onClose}
           >
             닫기
           </button>
-          <button className="w-[40%] py-3 rounded-lg hover:opacity-90 transition"
-          style={{
-            background: "rgba(112, 244, 182, 0.94)", // 참여 버튼 배경색
-            color: "black", // 텍스트 색상
-            borderRadius: "20px",
-          }}
-        >
+
+          <button
+            className="w-[40%] py-3 rounded-lg hover:opacity-90 transition"
+            style={{
+              background: "rgba(112, 244, 182, 0.94)",
+              color: "black",
+              borderRadius: "20px",
+            }}
+            onClick={handleJoin}
+          >
             참여
           </button>
         </div>
