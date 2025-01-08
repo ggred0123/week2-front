@@ -180,14 +180,14 @@ export default function MeetingListPage() {
         <div className="px- py-1">
           <CategoryButtons onCategoryChange={handleCategoryChange} />
         </div>
-        <div className="px-2 py-1">
+        <div className="px-2 py-6">
           <CenterBox
             color={centerBoxContent.color}
             icon={centerBoxContent.icon}
             text={centerBoxContent.text}
           />
         </div>
-        <div className="flex-1 overflow-y-auto px-2 space-y-3 pb-20">
+        <div className="flex-1 overflow-y-auto px-2 space-y-5 pb-20">
           {filteredCards.map((card) => (
             <div
               key={card.id}
@@ -206,6 +206,7 @@ export default function MeetingListPage() {
                 endTime={card.endTime}
                 keyword={card.keyword}
                 description={card.description}
+                
               />
             </div>
           ))}

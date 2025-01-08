@@ -10,7 +10,7 @@ export default function CategoryButtons({ onCategoryChange }: CategoryButtonsPro
     <div
       className="grid grid-cols-2 relative"
       style={{
-        left: '30px',
+        left: '44px',
         padding:'10px',
         gap: '20px 0px',
       }}

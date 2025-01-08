@@ -136,7 +136,7 @@ export default function CenterBox({ color, icon, text }: CenterBoxProps) {
       className="relative flex flex-col items-center"
       style={{
         width: "280px", // CenterBox 전체 크기
-        height: "180px", // 적절한 높이 조정
+        height: "120px", // 적절한 높이 조정
         margin: "0 auto", // CenterBox를 화면 중앙에 배치
       }}
     >
