@@ -151,7 +151,10 @@ const MeetingCard: React.FC<MeetingCardProps> = ({
                 marginTop: "4px",
               }}
             >
-              {startTime} - {endTime}
+              <div>
+                <p>- {startTime}</p>
+                <p>- {endTime}</p>
+              </div>
             </div>
           </div>
           <div

@@ -214,18 +214,14 @@ export default function MeetingListPage() {
         <div className="px- py-1">
           <CategoryButtons onCategoryChange={handleCategoryChange} />
         </div>
-
-        {/* 상단 CenterBox */}
-        <div className="px-2 py-1">
+        <div className="px-2 py-6">
           <CenterBox
             color={centerBoxContent.color}
             icon={centerBoxContent.icon}
             text={centerBoxContent.text}
           />
         </div>
-
-        {/* 목록 */}
-        <div className="flex-1 overflow-y-auto px-2 space-y-3 pb-20">
+        <div className="flex-1 overflow-y-auto px-2 space-y-5 pb-20">
           {filteredCards.map((card) => (
             <div
               key={card.id}
