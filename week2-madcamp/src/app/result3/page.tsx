@@ -41,10 +41,10 @@ export default function MatchingSuccess1() {
         display: "flex",
         flexDirection: "column",
         position: "relative",
-        transform: "scale(0.55,0.4427)", // 288 / 709
+        transform: "scale(0.535,0.4455)", // 288 / 709
         transformOrigin: "top left", // 스케일 기준점 설정
         width: "709px", // 스케일로 인해 잘리는 부분 방지
-        height: "1463px", // 높이 비율 조정
+        height: "1495px", // 높이 비율 조정
         overflow: "hidden",
       },
     main: {
@@ -81,7 +81,7 @@ export default function MatchingSuccess1() {
       width: "90%",
       maxWidth: "500px",
       height: "700px",
-      background: "#FCEBF8",
+      background: "#ECFACF",
       borderRadius: "15px",
       boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
       display: "flex",

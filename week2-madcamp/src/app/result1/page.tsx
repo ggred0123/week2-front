@@ -41,10 +41,10 @@ export default function MatchingSuccess1() {
       display: "flex",
       flexDirection: "column",
       position: "relative",
-      transform: "scale(0.55,0.4427)", // 288 / 709
+      transform: "scale(0.535,0.4455)", // 288 / 709
       transformOrigin: "top left", // 스케일 기준점 설정
       width: "709px", // 스케일로 인해 잘리는 부분 방지
-      height: "1463px", // 높이 비율 조정
+      height: "1495px", // 높이 비율 조정
       overflow: "hidden",
     },
     main: {
@@ -54,17 +54,17 @@ export default function MatchingSuccess1() {
       alignItems: "center",
       justifyContent: "center",
       padding: "1rem",
-      gap: "2rem",
+      gap: "0.1rem",
     },
     successImageContainer: {
-      width: "300px",
-      height: "300px",
+      width: "260px",
+      height: "260px",
       background: "rgba(255, 230, 175, 0.5)",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       borderRadius: "20px",
-      marginTop: "-150px",
+      marginTop: "-220px",
     },
     successImage: {
       width: "350px",
@@ -80,8 +80,8 @@ export default function MatchingSuccess1() {
     profileCard: {
       width: "90%",
       maxWidth: "500px",
-      height: "500px",
-      background: "#FCEBF8",
+      height: "700px",
+      background: "#D3EAF8",
       borderRadius: "15px",
       boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
       display: "flex",
@@ -91,8 +91,8 @@ export default function MatchingSuccess1() {
       gap: "16px",
     },
     profileImage: {
-      width: "300px",
-      height: "300px",
+      width: "270px",
+      height: "280px",
       borderRadius: "20px",
       border: "4px solid #FFF",
       marginTop: "30px",

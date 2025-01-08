@@ -9,10 +9,10 @@ export default function Recommendation() {
     <div
       className="min-h-screen bg-white flex flex-col relative"
       style={{
-        transform: "scale(0.55,0.4427)", // 288 / 709
+        transform: "scale(0.535,0.4455)", // 288 / 709
         transformOrigin: "top left", // 스케일 기준점 설정
         width: "709px", // 스케일로 인해 잘리는 부분 방지
-        height: "1463px", // 높이 비율 조정
+        height: "1495px", // 높이 비율 조정
         overflow: "hidden",
         position: "fixed", // 넘치는 부분 숨김
       }}
@@ -24,7 +24,7 @@ export default function Recommendation() {
         {/* 이미지 섹션 */}
         <div
           style={{
-            width: "300px",
+            width: "280px",
             height: "300px",
             flexShrink: 0,
             borderRadius: "15px",
@@ -37,7 +37,7 @@ export default function Recommendation() {
         {/* 텍스트 박스 */}
         <div
           style={{
-            width: "500px",
+            width: "480px",
             height: "200px",
             padding: "20px",
             borderRadius: "10px",
@@ -52,7 +52,7 @@ export default function Recommendation() {
               fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "26px",
-              letterSpacing: "0.5px",
+              letterSpacing: "0.1px",
               color: "#000",
               marginBottom: "8px",
             }}
@@ -80,7 +80,7 @@ export default function Recommendation() {
           style={{
             width: "100%",
             height: "500px",
-            maxWidth: "600px",
+            maxWidth: "500px",
             background:
               "linear-gradient(135deg, #1FF7FD -57.3%, #B33BF6 51.62%, #FF844C 101.62%, #FF844B 130.58%)",
             borderRadius: "15px",
@@ -106,9 +106,9 @@ export default function Recommendation() {
           <Link href="/wait1">
             <button
               style={{
-                width: "450px", // 버튼 폭
+                width: "380px", // 버튼 폭
                 height: "60px", // 버튼 높이
-                fontSize: "30px", // 버튼 글씨 크기
+                fontSize: "28px", // 버튼 글씨 크기
                 fontWeight: "bold",
                 marginBottom: "50px",
               }}
@@ -120,9 +120,9 @@ export default function Recommendation() {
           <Link href="/wait2">
             <button
               style={{
-                width: "450px", // 버튼 폭
+                width: "380px", // 버튼 폭
                 height: "60px", // 버튼 높이
-                fontSize: "30px", // 버튼 글씨 크기
+                fontSize: "28px", // 버튼 글씨 크기
                 fontWeight: "bold",
                 marginBottom: "50px",
               }}
@@ -134,9 +134,9 @@ export default function Recommendation() {
           <Link href="/wait3">
             <button
               style={{
-                width: "450px", // 버튼 폭
+                width: "380px", // 버튼 폭
                 height: "60px", // 버튼 높이
-                fontSize: "30px", // 버튼 글씨 크기
+                fontSize: "28px", // 버튼 글씨 크기
                 fontWeight: "bold",
               }}
               className="bg-green-100 text-green-700 rounded-lg"
