@@ -53,7 +53,7 @@ export default function MeetingListPage() {
     icon: "meet",
     text: "Meet new friends",
   });
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number>(0);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number>(1);
   const [cardsFromApi, setCardsFromApi] = useState<CardData[]>([]);
   const [filteredCards, setFilteredCards] = useState<ProcessedCardData[]>([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -213,6 +213,7 @@ export default function MeetingListPage() {
       </div>
       {selectedCard && (
         <CardPopup
+          meetingId={selectedCard.id}
           isOpen={!!selectedCard}
           onClose={() => setSelectedCard(null)}
           title={selectedCard.title}
