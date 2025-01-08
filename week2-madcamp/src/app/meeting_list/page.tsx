@@ -222,6 +222,7 @@ export default function MeetingListPage() {
           participants={selectedCard.participants}
           startTime={selectedCard.startTime}
           endTime={selectedCard.endTime}
+          keyword={selectedCard.keyword}
         />
       )}
 
