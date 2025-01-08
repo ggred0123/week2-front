@@ -18,7 +18,7 @@ interface CardData {
   startTime: string;
   endTime: string;
   maxPeople: number;
-  currentPeople: number;
+  currentPeople: number; // 실제 참여자 수를 업데이트할 필드
   location: string;
   keyword: string;
 }
@@ -68,12 +68,14 @@ export default function MeetingListPage() {
     4: { text: "#27AE60", bg: "rgba(39, 174, 96, 0.10)" },
   };
 
+  // CardData → ProcessedCardData 변환 함수
   const processDBData = (data: CardData): ProcessedCardData => {
     return {
       id: data.id,
       image: data.meetingImageUrl,
       title: data.title,
       location: data.location,
+      // updated currentPeople를 사용
       participants: `${data.currentPeople}/${data.maxPeople}명`,
       category: data.categoryId,
       startTime: new Date(data.startTime).toLocaleString(),
@@ -91,8 +93,7 @@ export default function MeetingListPage() {
     setCenterBoxContent({ color, icon, text });
   };
 
-  // 카테고리 버튼 클릭 시 실행되는 함수
-  // (카테고리명 -> ID 매핑, CenterBox 내용 업데이트, selectedCategoryId 업데이트)
+  // 카테고리 버튼 클릭 시
   const handleCategoryChange = (color: string, _: unknown, text: string) => {
     const iconMap: Record<
       string,
@@ -108,33 +109,63 @@ export default function MeetingListPage() {
     setSelectedCategoryId(categoryInfo.id);
   };
 
+  // 모임 목록 가져오기 + 각 모임의 실제 참여자 수 반영
   const fetchCardsFromApi = async (categoryId: number) => {
     try {
       const baseUrl =
         "https://everymadcamp-service-320281252015.asia-northeast3.run.app/meetings";
+      // 예: -1이면 전체, 그 외에는 categoryId 적용
       const url =
         categoryId === -1
           ? `${baseUrl}/all`
           : `${baseUrl}/{categoryId}?categoryId=${categoryId}`;
-      const response = await fetch(url);
 
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`API Error: ${response.status}`);
       }
+
       const data = await response.json();
-      setCardsFromApi(data.meetings || []);
-      const meetingsData = data.meetings || [];
-      setCardsFromApi(meetingsData);
+      const meetingsData: CardData[] = data.meetings || [];
+
+      // 각 meetingId에 대해 참가자 목록 조회하여 currentPeople 업데이트
+      const updatedMeetings = await Promise.all(
+        meetingsData.map(async (meeting) => {
+          try {
+            const joinRes = await fetch(
+              `${baseUrl}/${meeting.id}/meetingJoinUsers`
+            );
+            // 응답이 200이 아닐 경우, 기존 값 유지
+            if (!joinRes.ok) return meeting;
+
+            // 예: 응답이 그냥 숫자 하나 ("3")인 경우
+            const joinCountText = await joinRes.text();
+            // 문자열 → 숫자 변환
+            const realCurrentPeople = parseInt(joinCountText, 10) || 0;
+
+            return {
+              ...meeting,
+              currentPeople: realCurrentPeople,
+            };
+          } catch {
+            return meeting; // 실패 시 기존 값 유지
+          }
+        })
+      );
+
+      setCardsFromApi(updatedMeetings);
     } catch (error) {
       console.error("Failed to fetch cards:", error);
       setCardsFromApi([]);
     }
   };
 
+  // 카테고리가 바뀔 때마다 재조회
   useEffect(() => {
     fetchCardsFromApi(selectedCategoryId);
   }, [selectedCategoryId]);
 
+  // cardsFromApi가 바뀔 때마다 화면 출력용 데이터 변환
   useEffect(() => {
     if (Array.isArray(cardsFromApi) && cardsFromApi.length > 0) {
       setFilteredCards(cardsFromApi.map(processDBData));
@@ -143,6 +174,7 @@ export default function MeetingListPage() {
     }
   }, [cardsFromApi]);
 
+  // 위치 아이콘
   const locationIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -167,19 +199,23 @@ export default function MeetingListPage() {
     <div
       className="min-h-screen bg-white flex flex-col relative overflow-hidden"
       style={{
-        transform: "scale(0.535,0.4455)", // 288 / 709
-        transformOrigin: "top left", // 스케일 기준점 설정
-        width: "709px", // 스케일로 인해 잘리는 부분 방지
-        height: "1495px", // 높이 비율 조정
+        transform: "scale(0.535,0.4455)", // 임의 스케일 조정 예시
+        transformOrigin: "top left",
+        width: "709px",
+        height: "1495px",
         overflow: "hidden",
-        position: "fixed", // 넘치는 부분 숨김
+        position: "fixed",
       }}
     >
       <Header title="Meeting list" />
+
       <div className="flex-1 flex flex-col overflow-hidden">
+        {/* 카테고리 버튼 */}
         <div className="px- py-1">
           <CategoryButtons onCategoryChange={handleCategoryChange} />
         </div>
+
+        {/* 상단 CenterBox */}
         <div className="px-2 py-1">
           <CenterBox
             color={centerBoxContent.color}
@@ -187,6 +223,8 @@ export default function MeetingListPage() {
             text={centerBoxContent.text}
           />
         </div>
+
+        {/* 목록 */}
         <div className="flex-1 overflow-y-auto px-2 space-y-3 pb-20">
           {filteredCards.map((card) => (
             <div
@@ -211,6 +249,8 @@ export default function MeetingListPage() {
           ))}
         </div>
       </div>
+
+      {/* 카드 상세 팝업 */}
       {selectedCard && (
         <CardPopup
           meetingId={selectedCard.id}
@@ -227,13 +267,13 @@ export default function MeetingListPage() {
         />
       )}
 
-      {/* + 버튼 */}
+      {/* + 버튼 (새 모임 등록 팝업 열기) */}
       <button
         className="fixed bottom-20 right-3 w-8 h-8 flex items-center justify-center rounded-full shadow-lg bg-pink-500 z-10"
         style={{
-          width: "104px", // 버튼 너비 (기존보다 크거나 작게 설정)
-          height: "104px", // 버튼 높이
-          fontSize: "44px", // 버튼 내부 아이콘 크기 조정
+          width: "104px",
+          height: "104px",
+          fontSize: "44px",
           right: "30px",
           bottom: "140px",
         }}
@@ -259,7 +299,7 @@ export default function MeetingListPage() {
         <BottomNav1 />
       </div>
 
-      {/* 팝업 예시 */}
+      {/* 새 모임 등록 팝업 */}
       <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
         <h2 className="text-base font-bold mb-1">Add New Item</h2>
         <p className="text-sm">This is a placeholder for the popup content.</p>
